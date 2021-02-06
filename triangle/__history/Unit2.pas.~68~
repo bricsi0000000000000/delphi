@@ -1,0 +1,122 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    HypotenuseEdit: TEdit;
+    Label2: TLabel;
+    OppositeSideEdit: TEdit;
+    Label3: TLabel;
+    AdjacentSideEdit: TEdit;
+    CalculateButton: TButton;
+    PerimeterLabel: TLabel;
+    AreaLabel: TLabel;
+    procedure CalculateButtonClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.CalculateButtonClick(Sender: TObject);
+begin
+  var
+    hypotenus: Double;
+  var
+    oppsoiteSide: Double;
+  var
+    adjacentSide: Double;
+  var
+    perimeter: Double;
+  var
+    area: Double;
+  var inputGood : Boolean;
+  inputGood := true;
+
+  if Length(HypotenuseEdit.Text) = 0 then
+  begin
+    inputGood := false;
+    ShowMessage('You have to give a value for hypotenus!');
+  end
+  else if not TryStrToFloat(HypotenuseEdit.Text, hypotenus) then
+  begin
+    inputGood := false;
+    ShowMessage('Wrong value (' + HypotenuseEdit.Text + ') for hypotenus');
+  end
+  else
+  begin
+    if hypotenus <= 0 then
+    begin
+      inputGood := false;
+      ShowMessage('Hypotenus can''t be 0 or negativ');
+    end;
+  end;
+
+  if Length(OppositeSideEdit.Text) = 0 then
+  begin
+    inputGood := false;
+    ShowMessage('You have to give a value for opposite side!');
+  end
+  else if not TryStrToFloat(OppositeSideEdit.Text, oppsoiteSide) then
+  begin
+    inputGood := false;
+    ShowMessage('Wrong value (' + OppositeSideEdit.Text + ') for opposite side');
+  end
+  else
+  begin
+    if oppsoiteSide <= 0 then
+    begin
+      inputGood := false;
+      ShowMessage('Opposite side can''t be 0 or negativ');
+    end;
+  end;
+
+  if Length(AdjacentSideEdit.Text) = 0 then
+  begin
+    inputGood := false;
+    ShowMessage('You have to give a value for adjacent side!');
+  end
+  else if not TryStrToFloat(AdjacentSideEdit.Text, adjacentSide) then
+  begin
+    inputGood := false;
+    ShowMessage('Wrong value (' + AdjacentSideEdit.Text + ') for adjacent side');
+  end
+  else
+  begin
+    if adjacentSide <= 0 then
+    begin
+      inputGood := false;
+      ShowMessage('Adjacent side can''t be 0 or negativ');
+    end;
+  end;
+
+  if inputGood then
+  begin
+    perimeter := hypotenus + oppsoiteSide + adjacentSide;
+
+    var semiperimeter : Double;
+    semiperimeter := perimeter / 2;
+    area := Sqrt(semiperimeter * (semiperimeter - hypotenus)
+                               * (semiperimeter - oppsoiteSide)
+                               * (semiperimeter - adjacentSide));
+
+    PerimeterLabel.Caption := Format('Perimeter: %f.2', [perimeter]);
+    AreaLabel.Caption := Format('Area: %f', [area]);
+  end;
+end;
+
+end.
