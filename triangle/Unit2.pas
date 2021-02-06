@@ -44,7 +44,8 @@ begin
     perimeter: Double;
   var
     area: Double;
-  var inputGood : Boolean;
+  var
+    inputGood: Boolean;
   inputGood := true;
 
   if Length(HypotenuseEdit.Text) = 0 then
@@ -74,7 +75,8 @@ begin
   else if not TryStrToFloat(OppositeSideEdit.Text, oppsoiteSide) then
   begin
     inputGood := false;
-    ShowMessage('Wrong value (' + OppositeSideEdit.Text + ') for opposite side');
+    ShowMessage('Wrong value (' + OppositeSideEdit.Text +
+      ') for opposite side');
   end
   else
   begin
@@ -93,7 +95,8 @@ begin
   else if not TryStrToFloat(AdjacentSideEdit.Text, adjacentSide) then
   begin
     inputGood := false;
-    ShowMessage('Wrong value (' + AdjacentSideEdit.Text + ') for adjacent side');
+    ShowMessage('Wrong value (' + AdjacentSideEdit.Text +
+      ') for adjacent side');
   end
   else
   begin
@@ -108,11 +111,11 @@ begin
   begin
     perimeter := hypotenus + oppsoiteSide + adjacentSide;
 
-    var semiperimeter : Double;
+    var
+      semiperimeter: Double;
     semiperimeter := perimeter / 2;
-    area := Sqrt(semiperimeter * (semiperimeter - hypotenus)
-                               * (semiperimeter - oppsoiteSide)
-                               * (semiperimeter - adjacentSide));
+    area := Sqrt(semiperimeter * (semiperimeter - hypotenus) *
+      (semiperimeter - oppsoiteSide) * (semiperimeter - adjacentSide));
 
     PerimeterLabel.Caption := Format('Perimeter: %.2f', [perimeter]);
     AreaLabel.Caption := Format('Area: %.2f', [area]);
