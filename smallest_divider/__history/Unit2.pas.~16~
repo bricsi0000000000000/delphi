@@ -1,0 +1,52 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm2 = class(TForm)
+    NumberEdit: TEdit;
+    Label1: TLabel;
+    ResultLabel: TLabel;
+    procedure NumberEditChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.NumberEditChange(Sender: TObject);
+begin
+  var number : Integer;
+  var inputGood : Boolean;
+  var error : Integer;
+
+  val(NumberEdit.Text, number, error);
+
+  if error <> 0 then
+  begin
+    inputGood := false;
+    ResultLabel.Caption := NumberEdit.Text + ' is not a number';
+  end
+  else
+  begin
+    var smallestDivider : Integer;
+    var divider : Integer;
+    divider := 2;
+    while number mod divider <> 0 do
+      divider := divider + 1;
+    ResultLabel.Caption := 'Smallest divider (>1): ' + number.ToString();
+  end;
+end;
+
+end.
