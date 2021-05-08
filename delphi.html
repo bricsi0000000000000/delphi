@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1&period; Data types</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <ul>
+<li><a href="#1-data-types">1. Data types</a>
+<ul>
+<li><a href="#11-integers">1.1. Integers</a></li>
+<li><a href="#12-decimals">1.2. Decimals</a></li>
+<li><a href="#13-texts">1.3. Texts</a></li>
+<li><a href="#14-logical">1.4. Logical</a></li>
+<li><a href="#15-sets-enumerations-and-subtypes">1.5. Sets, enumerations and subtypes</a>
+<ul>
+<li><a href="#151-enumerations-enum">1.5.1. Enumerations <em>(<code>enum</code>)</em></a></li>
+<li><a href="#152-subranges">1.5.2. SubRanges</a></li>
+<li><a href="#153-sets">1.5.3. Sets</a>
+<ul>
+<li><a href="#1531-including-and-excluding-set-values">1.5.3.1. Including and excluding set values</a></li>
+<li><a href="#1532-set-operators">1.5.3.2. Set operators</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#16-compound-data-types">1.6. Compound data types</a>
+<ul>
+<li><a href="#161-arrays">1.6.1. Arrays</a></li>
+<li><a href="#162-records">1.6.2. Records</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-programming-logic">2. Programming logic</a>
+<ul>
+<li><a href="#21-if-then-else">2.1. If then else</a></li>
+<li><a href="#22-case-statements">2.2. Case statements</a>
+<ul>
+<li><a href="#221-a-simple-numerical-case-statement">2.2.1. A simple numerical case statement</a></li>
+<li><a href="#222-using-the-otherwise-clause">2.2.2. Using the otherwise clause</a></li>
+<li><a href="#223-using-enumeration-case-values">2.2.3. Using enumeration case values</a></li>
+</ul>
+</li>
+<li><a href="#23-loops">2.3. Loops</a>
+<ul>
+<li><a href="#231-for">2.3.1. For</a></li>
+<li><a href="#232-repeat">2.3.2. Repeat</a></li>
+<li><a href="#233-while">2.3.3. While</a></li>
+</ul>
+</li>
+<li><a href="#24-subroutines">2.4. Subroutines</a>
+<ul>
+<li><a href="#241-a-procedure-without-parameters">2.4.1. A procedure without parameters</a></li>
+<li><a href="#242-a-procedure-with-parameters">2.4.2. A procedure with parameters</a></li>
+<li><a href="#243-a-function-without-parameters">2.4.3. A function without parameters</a></li>
+<li><a href="#244-a-function-with-parameters">2.4.4. A function with parameters</a></li>
+<li><a href="#245-passing-data-by-reference">2.4.5. Passing data by reference</a></li>
+<li><a href="#246-output-only-parameters">2.4.6. Output only parameters</a></li>
+<li><a href="#247-constant-value-parameters">2.4.7. Constant value parameters</a></li>
+<li><a href="#248-same-routine-different-parameters">2.4.8. Same routine, different parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-exception-handling">3. Exception handling</a>
+<ul>
+<li><a href="#31-try-except">3.1. Try, except</a></li>
+<li><a href="#32-raising-exceptions">3.2. Raising exceptions</a></li>
+</ul>
+</li>
+<li><a href="#4-dates-and-times">4. Dates and times</a>
+<ul>
+<li><a href="#41-tdatetime">4.1. TDateTime</a></li>
+<li><a href="#42-short-and-long-month-names">4.2. Short and long month names</a></li>
+<li><a href="#43-short-and-long-day-names">4.3. Short and long day names</a></li>
+<li><a href="#44-date-and-time-calculations">4.4. Date and time calculations</a></li>
+<li><a href="#45-displaying-date-and-time-values">4.5. Displaying date and time values</a>
+<ul>
+<li><a href="#451-displaying-date-and-time-values">4.5.1. Displaying date and time values</a></li>
+<li><a href="#452-formatting-control-variables">4.5.2. Formatting control variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-files">5. Files</a>
+<ul>
+<li><a href="#51-accessing-files">5.1. Accessing files</a></li>
+<li><a href="#52-reading-and-writing-to-text-files">5.2. Reading and writing to text files</a>
+<ul>
+<li><a href="#521-example-code--reading-one-character-at-a-time-from-a-text-file-line">5.2.1. Example code : Reading one character at a time from a text file line</a></li>
+</ul>
+</li>
+<li><a href="#53-reading-and-writing-to-typed-binary-files">5.3. Reading and writing to typed binary files</a></li>
+<li><a href="#54-reading-and-writing-to-pure-binary-files">5.4. Reading and writing to pure binary files</a></li>
+<li><a href="#55-other-file-processing-mechanisms">5.5. Other file processing mechanisms</a></li>
+<li><a href="#56-getting-information-about-files-and-directories">5.6. Getting information about files and directories</a></li>
+<li><a href="#57-using-tstringlist-to-read-and-write-text-files">5.7. Using TStringList to read and write text files</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="1-data-types">1. Data types</h1>
+<h2 id="11-integers">1.1. Integers</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+    Int1 : Byte;     <span class="hljs-comment">//                        0 to 255</span>
+    Int2 : ShortInt; <span class="hljs-comment">//                     -127 to 127</span>
+    Int3 : Word;     <span class="hljs-comment">//                        0 to 65,535</span>
+    Int4 : SmallInt; <span class="hljs-comment">//                  -32,768 to 32,767</span>
+    Int5 : LongWord; <span class="hljs-comment">//                        0 to 4,294,967,295</span>
+    Int6 : Cardinal; <span class="hljs-comment">//                        0 to 4,294,967,295</span>
+    Int7 : LongInt;  <span class="hljs-comment">//           -2,147,483,648 to 2,147,483,647</span>
+    Int8 : Integer;  <span class="hljs-comment">//           -2,147,483,648 to 2,147,483,647</span>
+    Int9 : Int64;    <span class="hljs-comment">// -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</span>
+</div></code></pre>
+<h2 id="12-decimals">1.2. Decimals</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+    Dec1 : Single;   <span class="hljs-comment">//  7  significant digits, exponent   -38 to +38</span>
+    Dec2 : Currency; <span class="hljs-comment">// 50+ significant digits, fixed 4 decimal places</span>
+    Dec3 : Double;   <span class="hljs-comment">// 15  significant digits, exponent  -308 to +308</span>
+    Dec4 : Extended; <span class="hljs-comment">// 19  significant digits, exponent -4932 to +4932</span>
+</div></code></pre>
+<h2 id="13-texts">1.3. Texts</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+   Str1 : Char;        <span class="hljs-comment">// Holds a single character, small alphabet</span>
+   Str2 : WideChar;    <span class="hljs-comment">// Holds a single character, International alphabet</span>
+   Str3 : AnsiChar;    <span class="hljs-comment">// Holds a single character, small alphabet</span>
+   Str4 : ShortString; <span class="hljs-comment">// Holds a string of up to 255 Char&#x27;s</span>
+   Str5 : <span class="hljs-keyword">String</span>;      <span class="hljs-comment">// Holds strings of Char&#x27;s of any size desired</span>
+   Str6 : AnsiString;  <span class="hljs-comment">// Holds strings of AnsiChar&#x27;s any size desired</span>
+   Str7 : WideString;  <span class="hljs-comment">// Holds strings of WideChar&#x27;s of any size desired</span>
+</div></code></pre>
+<h2 id="14-logical">1.4. Logical</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+   Log1 : Boolean;     <span class="hljs-comment">// Can be &#x27;True&#x27; or &#x27;False&#x27;</span>
+</div></code></pre>
+<h2 id="15-sets-enumerations-and-subtypes">1.5. Sets, enumerations and subtypes</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TSuit = (Hearts, Diamonds, Clubs, Spades);    <span class="hljs-comment">// Defines the enumeration</span>
+ <span class="hljs-keyword">var</span>
+   suit : TSuit;                                 <span class="hljs-comment">// An enumeration variable</span>
+</div></code></pre>
+<p>Sets are often confused with enumerations.</p>
+<p>An <strong>enumeration variable</strong> can have <strong>only one of the enumerated values</strong>.</p>
+<p>A <strong>set</strong> can have <strong>none</strong>, <strong>1</strong>, <strong>some</strong>, or <strong>all of the set values</strong>.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TWeek = <span class="hljs-keyword">Set</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>..<span class="hljs-number">7</span>;      <span class="hljs-comment">// Set comprising the days of the week, by number</span>
+ <span class="hljs-keyword">var</span>
+   week : TWeek;
+ <span class="hljs-keyword">begin</span>
+   week := [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>];      <span class="hljs-comment">// Switch on the first 5 days of the week</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<h3 id="151-enumerations-enum">1.5.1. Enumerations <em>(<code>enum</code>)</em></h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TSuit = (Hearts, Diamonds, Clubs, Spades);   <span class="hljs-comment">// Defines enumeration range</span>
+ <span class="hljs-keyword">var</span>
+   suit : TSuit;                                <span class="hljs-comment">// Defines enumeration variable</span>
+ <span class="hljs-keyword">begin</span>
+   suit := Clubs;                               <span class="hljs-comment">// Set to one of the values</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>The TSuit type definition creates a new Delphi data type that we can use as a type for any new variable in our program.</p>
+<pre><code class="language-pas"><div> <span class="hljs-keyword">type</span>
+   TDay = (Mon=<span class="hljs-number">1</span>, Tue, Wed, Thu, Fri, Sat, Sun);   <span class="hljs-comment">// Enumeration values</span>
+ <span class="hljs-keyword">var</span>
+   today   : TDay;
+   weekend : Boolean;
+ <span class="hljs-keyword">begin</span>
+   today := Wed;          <span class="hljs-comment">// Set today to be Wednesday</span>
+   
+   <span class="hljs-keyword">if</span> today &gt; Fri         <span class="hljs-comment">// Ask if it is a weekend day</span>
+   <span class="hljs-keyword">then</span> weekend := true
+   <span class="hljs-keyword">else</span> weekend := false;
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><code>today</code> is set to <code>Wed</code> which has ordinal value = <code>3</code>
+<code>weekend</code> is set to <code>false</code> since <code>Wed</code> (<code>3</code>) <code>&lt;=</code> <code>Fri</code> (<code>5</code>)</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TDay = (Mon=<span class="hljs-number">1</span>, Tue, Wed, Thu, Fri, Sat, Sun);   <span class="hljs-comment">// Enumeration values</span>
+ <span class="hljs-keyword">var</span>
+   day : TDay;          <span class="hljs-comment">// Enumeration variable</span>
+ <span class="hljs-keyword">begin</span>
+   <span class="hljs-keyword">for</span> day := Mon <span class="hljs-keyword">to</span> Fri <span class="hljs-keyword">do</span>
+   <span class="hljs-keyword">begin</span>
+     <span class="hljs-comment">// day has each of the values Mon to Fri ( 1 to 5) in 5 iterations</span>
+     <span class="hljs-comment">// of this loop, allowing you to whatever you want.</span>
+   <span class="hljs-keyword">end</span>;
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<blockquote>
+<p><strong>Warning</strong> : each of the values in an enumeration must be unique in a program. This restriction allows you to assign an enumeration value without having to qualify the type it is defined in.</p>
+</blockquote>
+<h3 id="152-subranges">1.5.2. SubRanges</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TSmallNum = <span class="hljs-number">0</span>..<span class="hljs-number">9</span>;
+ <span class="hljs-keyword">var</span>
+   smallNum : TSmallNum;
+ <span class="hljs-keyword">begin</span>
+   smallNum := <span class="hljs-number">5</span>;    <span class="hljs-comment">// Allowed</span>
+   smallNum := <span class="hljs-number">10</span>;   <span class="hljs-comment">// Not allowed</span>
+   smallNum := -<span class="hljs-number">1</span>;   <span class="hljs-comment">// Not allowed</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<blockquote>
+<p>Delphi will not compile code that has assignments outside of the given range.</p>
+</blockquote>
+<p>Subranges of characters:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TUpper = <span class="hljs-string">&#x27;A&#x27;</span>..<span class="hljs-string">&#x27;Z&#x27;</span>;
+   TLower = <span class="hljs-string">&#x27;a&#x27;</span>..<span class="hljs-string">&#x27;z&#x27;</span>;
+   TDigit = <span class="hljs-string">&#x27;0&#x27;</span>..<span class="hljs-string">&#x27;9&#x27;</span>;
+ <span class="hljs-keyword">var</span>
+   upper : TUpper;
+   lower : TLower;
+   digit : TDigit;
+ <span class="hljs-keyword">begin</span>
+   upper := <span class="hljs-string">&#x27;G&#x27;</span>;   <span class="hljs-comment">// Allowed</span>
+   lower := <span class="hljs-string">&#x27;g&#x27;</span>;   <span class="hljs-comment">// Allowed</span>
+   digit := <span class="hljs-string">&#x27;7&#x27;</span>;   <span class="hljs-comment">// Allowed</span>
+ 
+   upper := <span class="hljs-string">&#x27;g&#x27;</span>;   <span class="hljs-comment">// Not allowed</span>
+   lower := <span class="hljs-string">&#x27;7&#x27;</span>;   <span class="hljs-comment">// Not allowed</span>
+   digit := <span class="hljs-number">4</span>;     <span class="hljs-comment">// Not allowed</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>Subrange of enumerations:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+    TDay = (Mon=<span class="hljs-number">1</span>, Tue, Wed, Thu, Fri, Sat, Sun);   <span class="hljs-comment">// Enumeration values</span>
+    TWeekDays = Mon..Fri;                           <span class="hljs-comment">// Enumeration subranges</span>
+    TWeekend  = Sat..Sun;
+</div></code></pre>
+<h3 id="153-sets">1.5.3. Sets</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TDigits = <span class="hljs-keyword">set</span> <span class="hljs-keyword">of</span> <span class="hljs-string">&#x27;1&#x27;</span>..<span class="hljs-string">&#x27;9&#x27;</span>;       <span class="hljs-comment">// Set of numeric digit characters</span>
+ <span class="hljs-keyword">var</span>
+   digits : TDigits;                <span class="hljs-comment">// Set variable</span>
+   myChar : char;
+ <span class="hljs-keyword">begin</span>
+   <span class="hljs-comment">// At the start, digits has all set values switched off</span>
+   <span class="hljs-comment">// So let us switch some on. Notice how we can switch on single</span>
+   <span class="hljs-comment">// values, and ranges, all in the one assignment:</span>
+   digits := [<span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>..<span class="hljs-string">&#x27;7&#x27;</span>];
+ 
+   <span class="hljs-comment">// Now we can test to see what we have set on:</span>
+   <span class="hljs-keyword">for</span> myChar := <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;9&#x27;</span> <span class="hljs-keyword">do</span>
+     <span class="hljs-keyword">if</span> myChar <span class="hljs-keyword">In</span> digits
+     <span class="hljs-keyword">then</span> ShowMessageFmt(<span class="hljs-string">&#x27;&#x27;&#x27;%s&#x27;&#x27; is in digits&#x27;</span>,[myChar])
+     <span class="hljs-keyword">else</span> ShowMessageFmt(<span class="hljs-string">&#x27;&#x27;&#x27;%s&#x27;&#x27; is not in digits&#x27;</span>,[myChar])
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>The <code>In</code> operator tests to see if a set contains a value.</p>
+<p>The data shown is as follows:</p>
+<pre><code><code><div>'1' is not in digits
+'2' is in digits
+'3' is not in digits
+'4' is in digits
+'5' is in digits
+'6' is in digits
+'7' is in digits
+'8' is not in digits
+'9' is not in digits
+</div></code></code></pre>
+<h4 id="1531-including-and-excluding-set-values">1.5.3.1. Including and excluding set values</h4>
+<p><code>Include</code> <em>(switch on)</em> or <code>exclude</code> <em>(switch off)</em> individual values without affecting other values.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   <span class="hljs-comment">// We define a set by type - bytes have the range : 0 to 255</span>
+   TNums = <span class="hljs-keyword">set</span> <span class="hljs-keyword">of</span> Byte;
+ <span class="hljs-keyword">var</span>
+   nums : TNums;
+ <span class="hljs-keyword">begin</span>
+   nums := [<span class="hljs-number">20</span>..<span class="hljs-number">50</span>];     <span class="hljs-comment">// Switch on a range of 31 values</span>
+   Include(nums, <span class="hljs-number">12</span>);    <span class="hljs-comment">// Switch on an additional value : 12</span>
+   Exclude(nums, <span class="hljs-number">35</span>);    <span class="hljs-comment">// Switch off a value : 35</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><code>nums</code> now has the following values set : <code>12 , 20..34 , 36..50</code></p>
+<h4 id="1532-set-operators">1.5.3.2. Set operators</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">operator</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>+</code></td>
+<td style="text-align:left">union of two sets</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*</code></td>
+<td style="text-align:left">intersection of two sets</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-</code></td>
+<td style="text-align:left">difference of two sets</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>=</code></td>
+<td style="text-align:left">tests for identical sets</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&lt;&gt;</code></td>
+<td style="text-align:left">tests for non-identical sets</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&gt;=</code></td>
+<td style="text-align:left">is one set a subset of another</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&lt;=</code></td>
+<td style="text-align:left">is one set a superset of another</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TNums = <span class="hljs-keyword">set</span> <span class="hljs-keyword">of</span> <span class="hljs-number">1</span>..<span class="hljs-number">9</span>;
+ <span class="hljs-keyword">var</span>
+   nums1, nums2, nums3, nums4, nums5, nums6 : TNums;
+ <span class="hljs-keyword">begin</span>
+   nums1 := [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
+   nums2 := [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>];
+   nums3 := [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>];
+ 
+   nums4 := nums1 + nums2;    <span class="hljs-comment">// nums4 now [1,2,3,4]</span>
+   nums5 := nums1 * nums2;    <span class="hljs-comment">// nums5 now [1,2]</span>
+   nums6 := nums1 - nums2;    <span class="hljs-comment">// nums6 now [3]</span>
+ 
+   <span class="hljs-comment">// Test for equality</span>
+   <span class="hljs-keyword">if</span> nums1 = nums2
+   <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;nums1 =  nums2&#x27;</span>)
+   <span class="hljs-keyword">else</span> ShowMessage(<span class="hljs-string">&#x27;nums1 &lt;&gt; nums2&#x27;</span>);
+ 
+   <span class="hljs-comment">// Test for inequality</span>
+   <span class="hljs-keyword">if</span> nums1 &lt;&gt; nums3
+   <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;nums1 &lt;&gt; nums3&#x27;</span>)
+   <span class="hljs-keyword">else</span> ShowMessage(<span class="hljs-string">&#x27;nums1 =  nums3&#x27;</span>);
+ 
+   <span class="hljs-comment">// Is nums1 a subset of nums3?</span>
+   <span class="hljs-keyword">if</span> nums1 &lt;= nums3
+   <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;nums1 is a subset of nums3&#x27;</span>)
+   <span class="hljs-keyword">else</span> ShowMessage(<span class="hljs-string">&#x27;nums1 is not a subset of nums3&#x27;</span>);
+ 
+   <span class="hljs-comment">// Is nums1 a superset of nums3?</span>
+   <span class="hljs-keyword">if</span> nums1 &gt;= nums3
+   <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;nums1 is a superset of nums3&#x27;</span>)
+   <span class="hljs-keyword">else</span> ShowMessage(<span class="hljs-string">&#x27;nums1 is not a superset of nums3&#x27;</span>);
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>nums1 &lt;&gt; nums2
+nums1 &lt;&gt; nums3
+nums1 is a subset of nums3
+nums1 is not a superset of nums3
+</div></code></code></pre>
+<h2 id="16-compound-data-types">1.6. Compound data types</h2>
+<h3 id="161-arrays">1.6.1. Arrays</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+   Suits : <span class="hljs-keyword">array</span>[<span class="hljs-number">1</span>..<span class="hljs-number">4</span>] <span class="hljs-keyword">of</span> <span class="hljs-keyword">String</span>;    <span class="hljs-comment">// A list of 4 playing card suit names</span>
+ 
+ <span class="hljs-keyword">begin</span>
+   Suits[<span class="hljs-number">1</span>] := <span class="hljs-string">&#x27;Hearts&#x27;</span>;    <span class="hljs-comment">// Assigning to array index 1</span>
+   Suits[<span class="hljs-number">2</span>] := <span class="hljs-string">&#x27;Diamonds&#x27;</span>;  <span class="hljs-comment">// Assigning to array index 2</span>
+   Suits[<span class="hljs-number">3</span>] := <span class="hljs-string">&#x27;Clubs&#x27;</span>;     <span class="hljs-comment">// Assigning to array index 3</span>
+   Suits[<span class="hljs-number">4</span>] := <span class="hljs-string">&#x27;Spades&#x27;</span>;    <span class="hljs-comment">// Assigning to array index 4</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>The array defined above has indexes 1 to 4 (1..4). The two dots indicate a range.</p>
+<h3 id="162-records">1.6.2. Records</h3>
+<p><em>Like a <code>class</code> or a <code>struct</code>, but not because there are other data types for object oriented things</em></p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TCustomer=<span class="hljs-keyword">Record</span>
+     firstName : <span class="hljs-keyword">string</span>[<span class="hljs-number">20</span>];
+     lastName  : <span class="hljs-keyword">string</span>[<span class="hljs-number">20</span>];
+     age       : byte;
+   <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  customer : TCustomer;            <span class="hljs-comment">// Our customer variable</span>
+<span class="hljs-keyword">begin</span>
+  customer.firstName := <span class="hljs-string">&#x27;Fred&#x27;</span>;    <span class="hljs-comment">// Assigning to the customer record</span>
+  customer.lastName  := <span class="hljs-string">&#x27;Bloggs&#x27;</span>;
+  customer.age       := <span class="hljs-number">55</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>customer.firstName is now set to 'Fred'
+customer.lastName  is now set to 'Bloggs'
+customer.age       is now set to 55
+</div></code></code></pre>
+<h1 id="2-programming-logic">2. Programming logic</h1>
+<h2 id="21-if-then-else">2.1. If then else</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+   number : Integer;
+   text   : <span class="hljs-keyword">String</span>;
+ <span class="hljs-keyword">begin</span>
+   number := Sqr(<span class="hljs-number">17</span>);          <span class="hljs-comment">// Calculate the square of 17</span>
+   <span class="hljs-keyword">if</span> number &gt; <span class="hljs-number">400</span>                  
+   <span class="hljs-keyword">then</span> text := <span class="hljs-string">&#x27;17 squared &gt; 400&#x27;</span>    <span class="hljs-comment">// Action when if condition is true</span>
+   <span class="hljs-keyword">else</span> text := <span class="hljs-string">&#x27;17 squared &lt;= 400&#x27;</span>;  <span class="hljs-comment">// Action when if condition is false</span>
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>text is set to : '17 squared &lt;= 400'
+</div></code></code></pre>
+<p><strong>Multiple</strong>:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">if</span> (condition1) <span class="hljs-keyword">And</span> (condition2)   <span class="hljs-comment">// Both conditions must be satisfied</span>
+   <span class="hljs-keyword">then</span>
+     <span class="hljs-keyword">begin</span>
+       statement1;
+       statement2;
+       ...
+     <span class="hljs-keyword">end</span>              <span class="hljs-comment">// Notice no terminating &#x27;;&#x27; - still part of &#x27;if&#x27;</span>
+   <span class="hljs-keyword">else</span>
+     <span class="hljs-keyword">begin</span>
+       statement3;
+       statement4;
+       ...
+     <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Nested</strong>:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">if</span> condition1
+   <span class="hljs-keyword">then</span> statement1
+   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> condition2
+        <span class="hljs-keyword">then</span> statement2
+        <span class="hljs-keyword">else</span> statement3;
+</div></code></pre>
+<h2 id="22-case-statements">2.2. Case statements</h2>
+<h3 id="221-a-simple-numerical-case-statement">2.2.1. A simple numerical case statement</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+   i : Integer;
+ <span class="hljs-keyword">begin</span>
+   i := RandomRange(<span class="hljs-number">15</span>,<span class="hljs-number">20</span>);  <span class="hljs-comment">// Generate a random number from 15 to 20</span>
+   <span class="hljs-keyword">Case</span> i <span class="hljs-keyword">of</span>
+     <span class="hljs-number">15</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was fifteen&#x27;</span>);
+     <span class="hljs-number">16</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was sixteen&#x27;</span>);
+     <span class="hljs-number">17</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was seventeen&#x27;</span>);
+     <span class="hljs-number">18</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was eighteen&#x27;</span>);
+     <span class="hljs-number">19</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was nineteen&#x27;</span>);
+     <span class="hljs-number">20</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was twenty&#x27;</span>);
+   <span class="hljs-keyword">end</span>;
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Random number was fifteen
+</div></code></code></pre>
+<p>The <code>RandomRange</code> routine generates a random number between two given values. However, each time you run the program, it will always start with the same pseudo random value.</p>
+<h3 id="222-using-the-otherwise-clause">2.2.2. Using the otherwise clause</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+   i : Integer;
+ <span class="hljs-keyword">begin</span>
+   i := RandomRange(<span class="hljs-number">10</span>,<span class="hljs-number">20</span>);  <span class="hljs-comment">// Generate a random number from 10 to 20</span>
+   <span class="hljs-keyword">Case</span> i <span class="hljs-keyword">of</span>
+     <span class="hljs-number">15</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was fifteen&#x27;</span>);
+     <span class="hljs-number">16</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was sixteen&#x27;</span>);
+     <span class="hljs-number">17</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was seventeen&#x27;</span>);
+     <span class="hljs-number">18</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was eighteen&#x27;</span>);
+     <span class="hljs-number">19</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was nineteen&#x27;</span>);
+     <span class="hljs-number">20</span> : ShowMessage(<span class="hljs-string">&#x27;Random number was twenty&#x27;</span>);
+   <span class="hljs-keyword">else</span>
+     ShowMessageFmt(<span class="hljs-string">&#x27;Unexpected number : %d&#x27;</span>,[i]);
+   <span class="hljs-keyword">end</span>;
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Unexpected number : 10
+</div></code></code></pre>
+<h3 id="223-using-enumeration-case-values">2.2.3. Using enumeration case values</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TCar = (Nissan, Ford, Rover, Jaguar);    <span class="hljs-comment">// An enumeration type</span>
+ <span class="hljs-keyword">var</span>     
+   car : TCar;                              <span class="hljs-comment">// An enumeration variable</span>
+ <span class="hljs-keyword">begin</span>
+   car := Rover;                            <span class="hljs-comment">// Set this variable</span>
+   <span class="hljs-keyword">case</span> car <span class="hljs-keyword">of</span>
+     Nissan : ShowMessage(<span class="hljs-string">&#x27;We have a Nissan car&#x27;</span>);
+     Ford   : ShowMessage(<span class="hljs-string">&#x27;We have a Ford car&#x27;</span>);
+     Rover  : ShowMessage(<span class="hljs-string">&#x27;We have a Rover car&#x27;</span>);
+     Jaguar : ShowMessage(<span class="hljs-string">&#x27;We have a Jaguar car&#x27;</span>);
+   <span class="hljs-keyword">end</span>;
+ <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>We have a Rover car
+</div></code></code></pre>
+<h2 id="23-loops">2.3. Loops</h2>
+<h3 id="231-for">2.3.1. For</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  count : Integer;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">For</span> count := <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-number">5</span> <span class="hljs-keyword">do</span>
+    ShowMessageFmt(<span class="hljs-string">&#x27;Count is now %d&#x27;</span>,[count]);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Count is now 1
+Count is now 2
+Count is now 3
+Count is now 4
+Count is now 5
+</div></code></code></pre>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+   TWeekDay = (Monday=<span class="hljs-number">1</span>, Tuesday, Wednesday, Thursday, Friday);
+<span class="hljs-keyword">var</span>
+  weekday : TWeekDay;
+  hours   : <span class="hljs-keyword">array</span>[TWeekDay] <span class="hljs-keyword">of</span> byte;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Set up the hours every day to zero</span>
+  <span class="hljs-keyword">for</span> weekDay := Monday <span class="hljs-keyword">to</span> Friday <span class="hljs-keyword">do</span>
+    hours[weekDay] := <span class="hljs-number">0</span>;
+
+  <span class="hljs-comment">// Add an hour of overtime to the working hours on Tuesday to Thursday</span>
+  <span class="hljs-keyword">for</span> weekDay := Tuesday <span class="hljs-keyword">to</span> Thursday <span class="hljs-keyword">do</span>
+    Inc(hours[weekDay]);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>hours[Monday]    = 00
+hours[Tuesday]   = 10
+hours[Wednesday] = 10
+hours[Thursday]  = 1
+hours[Friday]    = 0
+</div></code></code></pre>
+<blockquote>
+<p><code>Inc</code>: increment the hours</p>
+</blockquote>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  letter : Char;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">for</span> letter := <span class="hljs-string">&#x27;G&#x27;</span> <span class="hljs-keyword">downto</span> <span class="hljs-string">&#x27;A&#x27;</span> <span class="hljs-keyword">do</span>
+    ShowMessage(<span class="hljs-string">&#x27;Letter = &#x27;</span>+letter)
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Letter = G
+Letter = F
+Letter = E
+Letter = D
+Letter = C
+Letter = B
+Letter = A
+</div></code></code></pre>
+<h3 id="232-repeat">2.3.2. Repeat</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  <span class="hljs-keyword">exit</span> : Boolean;          <span class="hljs-comment">// Our exit condition flag</span>
+  i : Integer;
+<span class="hljs-keyword">begin</span>
+  i := <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">exit</span> := False;           <span class="hljs-comment">// do not exit until we are ready</span>
+  <span class="hljs-keyword">repeat</span>
+    Inc(i);                <span class="hljs-comment">// Increment a count</span>
+    <span class="hljs-keyword">if</span> Sqr(i) &gt; <span class="hljs-number">99</span>
+    <span class="hljs-keyword">then</span> <span class="hljs-keyword">exit</span> := true;     <span class="hljs-comment">// Exit if the square of our number exceeds 99</span>
+  <span class="hljs-keyword">until</span> <span class="hljs-keyword">exit</span>;              <span class="hljs-comment">// Shorthand for &#x27;until exit := true&#x27;</span>
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Upon exit, i will be 10 (since Sqr(10) &gt; 99)
+</div></code></code></pre>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  i : Integer;
+<span class="hljs-keyword">begin</span>
+  i := <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">repeat</span>
+    Inc(i);                <span class="hljs-comment">// Increment a count</span>
+  <span class="hljs-keyword">until</span> (Sqr(i) &gt; <span class="hljs-number">99</span>) <span class="hljs-keyword">or</span> (Sqrt(i) &gt; <span class="hljs-number">2.5</span>);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Upon exit, i will be 7 (since Sqrt(7) &gt; 2.5)
+</div></code></code></pre>
+<h3 id="233-while">2.3.3. While</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  i : Integer;
+<span class="hljs-keyword">begin</span>
+  i := <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">while</span> (Sqr(i) &lt;= <span class="hljs-number">99</span>) <span class="hljs-keyword">and</span> (Sqrt(i) &lt;= <span class="hljs-number">2.5</span>) <span class="hljs-keyword">do</span>
+    Inc(i);                <span class="hljs-comment">// Increment a count</span>
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Upon exit, i will be 7 (since Sqrt(7) &gt; 2.5)
+</div></code></code></pre>
+<h2 id="24-subroutines">2.4. Subroutines</h2>
+<h3 id="241-a-procedure-without-parameters">2.4.1. A procedure without parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">ShowTime</span>;</span>                    <span class="hljs-comment">// A procedure with no parameters</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Display the current date and time</span>
+  ShowMessage(<span class="hljs-string">&#x27;Date and time is &#x27;</span>+DateTimeToStr(Now));
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-comment">// Let us call this procedure</span>
+ShowTime;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Date and time is 12/12/2002 15:30:45
+</div></code></code></pre>
+<h3 id="242-a-procedure-with-parameters">2.4.2. A procedure with parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">ShowTime</span><span class="hljs-params">(dateTime : TDateTime)</span>;</span>  <span class="hljs-comment">// With parameters</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Display the date and time passed to the routine</span>
+  ShowMessage(<span class="hljs-string">&#x27;Date and time is &#x27;</span>+DateTimeToStr(dateTime));
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-comment">// Let us call this procedure</span>
+ShowTime(Yesterday);
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Date and time is 11/12/2002
+</div></code></code></pre>
+<h3 id="243-a-function-without-parameters">2.4.3. A function without parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">RandomChar</span> :</span> char;
+<span class="hljs-keyword">var</span>
+  i : integer;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Get a random number from 65 to 90</span>
+  <span class="hljs-comment">// (These numbers equate to characters &#x27;A&#x27; to &#x27;Z&#x27;</span>
+  i := RandomRange(<span class="hljs-number">65</span>, <span class="hljs-number">90</span>);
+  
+  <span class="hljs-comment">// Return this value as a char type in the return variable, Result</span>
+  Result := Chr(i);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-comment">// Let us call this function</span>
+ShowMessage(<span class="hljs-string">&#x27;Char chosen is : &#x27;</span>+RandomChar);
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Char chosen is : A
+</div></code></code></pre>
+<h3 id="244-a-function-with-parameters">2.4.4. A function with parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Average</span><span class="hljs-params">(a, b, c : Extended)</span> :</span> Extended;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// return the average of the 3 passed numbers</span>
+  Result := Mean(a, b, c);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-comment">// Let us call this function</span>
+ShowMessageFmt(<span class="hljs-string">&#x27;Average of 2, 13 and 56 = %f&#x27;</span>,[Average(<span class="hljs-number">2</span>,<span class="hljs-number">13</span>,<span class="hljs-number">56</span>)]);
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Average of 2, 13 and 56 = 23.67
+</div></code></code></pre>
+<hr>
+<pre><code class="language-pas"><div><span class="hljs-comment">// Full Unit code.</span>
+<span class="hljs-comment">// -----------------------------------------------------------</span>
+<span class="hljs-comment">// You must store this code in a unit called Unit1 with a form</span>
+<span class="hljs-comment">// called Form1 that has an OnCreate event called FormCreate.</span>
+
+<span class="hljs-keyword">unit</span> Unit1;
+
+<span class="hljs-keyword">interface</span>
+
+<span class="hljs-keyword">uses</span>
+  Forms, Dialogs;
+
+<span class="hljs-keyword">type</span>
+  <span class="hljs-title">TForm1</span> = <span class="hljs-keyword">class</span>(TForm)
+    <span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+  <span class="hljs-keyword">end</span>;
+
+<span class="hljs-keyword">var</span>
+  Form1: TForm1;
+
+<span class="hljs-keyword">implementation</span>
+<span class="hljs-meta">{$R *.dfm}</span> <span class="hljs-comment">// Include form definitions</span>
+
+<span class="hljs-comment">// A small procedure</span>
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">InLineProc</span>;</span>
+<span class="hljs-keyword">begin</span>
+  ShowMessage(<span class="hljs-string">&#x27;Hello World&#x27;</span>);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Call our little in line procedure</span>
+  InLineProc;
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-keyword">end</span>.
+</div></code></pre>
+<p>The <code>InLineProc</code> we have defined above is literally that - an in-line subroutine. It must be defined before it is called.</p>
+<p>The <code>TForm1.OnCreate</code> procedure is quite different. The <code>TForm1</code> qualifier gives a clue. This procedure, along with out InLineProc procedure, is defined in what is called the Implementation section of the Unit. Looking earlier in the code, you will see a one line declaration of OnCreate in the Interface part of the Unit. It is part of the class definition for the form <em>(<code>TForm1</code>)</em> that the Unit and program use as the main screen.</p>
+<hr>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">DoIt</span><span class="hljs-params">(A : Integer)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  A := A * <span class="hljs-number">2</span>;
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in the procedure  = %d&#x27;</span>,[A]);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">var</span>
+  A : Integer;
+<span class="hljs-keyword">begin</span>
+  A := <span class="hljs-number">22</span>;
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in program before call = %d&#x27;</span>,[A]);
+  <span class="hljs-comment">// Call the procedure</span>
+  DoIt(A);
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in program now = %d&#x27;</span>,[A]);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>A in program before call = 22
+A in the procedure = 44
+A in program now = 22
+</div></code></code></pre>
+<h3 id="245-passing-data-by-reference">2.4.5. Passing data by reference</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">DoIt</span><span class="hljs-params">(<span class="hljs-keyword">Var</span> A : Integer)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  A := A * <span class="hljs-number">2</span>;
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in the procedure  = %d&#x27;</span>,[A]);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">var</span>
+  A : Integer;
+<span class="hljs-keyword">begin</span>
+  A := <span class="hljs-number">22</span>;
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in program before call = %d&#x27;</span>,[A]);
+  <span class="hljs-comment">// Call the procedure</span>
+  DoIt(A);
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in program now = %d&#x27;</span>,[A]);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>A in program before call = 22
+A in the procedure = 44
+A in program now = 44
+</div></code></code></pre>
+<h3 id="246-output-only-parameters">2.4.6. Output only parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">DoIt</span><span class="hljs-params">(<span class="hljs-keyword">Out</span> A : Integer)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  A := <span class="hljs-number">123</span>;
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in the procedure  = %d&#x27;</span>,[A]);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">var</span>
+  A : Integer;
+<span class="hljs-keyword">begin</span>
+  ShowMessage(<span class="hljs-string">&#x27;A before the call is unknown&#x27;</span>);
+  <span class="hljs-comment">// Call the procedure</span>
+  DoIt(A);
+  ShowMessageFmt(<span class="hljs-string">&#x27;A in program now = %d&#x27;</span>,[A]);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>A before the call is unknown
+A in the procedure = 123
+A in program now = 123
+</div></code></code></pre>
+<h3 id="247-constant-value-parameters">2.4.7. Constant value parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">DoIt</span><span class="hljs-params">(<span class="hljs-keyword">Const</span> A : Integer; <span class="hljs-keyword">Out</span> B : Integer)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  B := A * <span class="hljs-number">2</span>;
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">var</span>
+  A, B : Integer;
+<span class="hljs-keyword">begin</span>
+  A := <span class="hljs-number">22</span>;
+  <span class="hljs-comment">// Call the procedure</span>
+  DoIt(A, B);
+  ShowMessageFmt(<span class="hljs-string">&#x27;B has been set to = %d&#x27;</span>,[B]);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>B has been set to 44
+</div></code></code></pre>
+<h3 id="248-same-routine-different-parameters">2.4.8. Same routine, different parameters</h3>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">DoIt</span>;</span> <span class="hljs-keyword">overload</span>;
+<span class="hljs-keyword">begin</span>
+  ShowMessage(<span class="hljs-string">&#x27;DoIt with no parameters called&#x27;</span>);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">DoIt</span><span class="hljs-params">(msg : <span class="hljs-keyword">String</span>)</span>;</span> <span class="hljs-keyword">overload</span>;
+<span class="hljs-keyword">begin</span>
+  ShowMessage(<span class="hljs-string">&#x27;DoIt called with parameter : &#x27;</span>+msg);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Call the procedure using no parameters</span>
+  DoIt;
+  <span class="hljs-comment">// Now call the procedure using one parameter</span>
+  DoIt(<span class="hljs-string">&#x27;Hi there&#x27;</span>);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>DoIt with no parameters called
+DoIt called with parameter : Hi There
+</div></code></code></pre>
+<h1 id="3-exception-handling">3. Exception handling</h1>
+<h2 id="31-try-except">3.1. Try, except</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">Try</span>
+    ...
+    The code we want <span class="hljs-keyword">to</span> execute
+    ...
+  <span class="hljs-keyword">Except</span>
+    ...
+    This code gets executed <span class="hljs-keyword">if</span> an exception occurs <span class="hljs-keyword">in</span> the above block
+    ...
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  number1, number0 : Integer;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">try</span>
+    number0 := <span class="hljs-number">0</span>;
+    number1 := <span class="hljs-number">1</span>;
+    number1 := number1 <span class="hljs-keyword">div</span> number0;
+    ShowMessage(<span class="hljs-string">&#x27;1 / 0 = &#x27;</span>+IntToStr(number1));
+  <span class="hljs-keyword">except</span>
+    <span class="hljs-keyword">on</span> E : Exception <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">begin</span>
+      ShowMessage(<span class="hljs-string">&#x27;Exception class name = &#x27;</span>+E.ClassName);
+      ShowMessage(<span class="hljs-string">&#x27;Exception message = &#x27;</span>+E.<span class="hljs-keyword">Message</span>);
+    <span class="hljs-keyword">end</span>;
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<pre><code class="language-pas"><div><span class="hljs-keyword">except</span>
+    <span class="hljs-comment">// IO error</span>
+    <span class="hljs-keyword">On</span> E : EInOutError <span class="hljs-keyword">do</span>
+      ShowMessage(<span class="hljs-string">&#x27;IO error : &#x27;</span>+E.<span class="hljs-keyword">Message</span>);
+    <span class="hljs-comment">// Dibision by zero</span>
+    <span class="hljs-keyword">On</span> E : EDivByZero <span class="hljs-keyword">do</span>
+      ShowMessage(<span class="hljs-string">&#x27;Div by zero error : &#x27;</span>+E.<span class="hljs-keyword">Message</span>);
+    <span class="hljs-comment">// Catch other errors</span>
+    <span class="hljs-keyword">else</span>
+      ShowMessage(<span class="hljs-string">&#x27;Unknown error&#x27;</span>);
+  <span class="hljs-keyword">end</span>;
+</div></code></pre>
+<h2 id="32-raising-exceptions">3.2. Raising exceptions</h2>
+<table>
+<thead>
+<tr>
+<th>exception name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Base class</td>
+</tr>
+<tr>
+<td>EAbort</td>
+<td>Abort without dialog</td>
+</tr>
+<tr>
+<td>EAbstractError</td>
+<td>Abstract method error</td>
+</tr>
+<tr>
+<td>AssertionFailed</td>
+<td>Assert call failed</td>
+</tr>
+<tr>
+<td>EBitsError</td>
+<td>Boolean array error</td>
+</tr>
+<tr>
+<td>ECommonCalendarError</td>
+<td>Calendar calc error</td>
+</tr>
+<tr>
+<td>EDateTimeError</td>
+<td>DateTime calc error</td>
+</tr>
+<tr>
+<td>EMonthCalError</td>
+<td>Month calc error</td>
+</tr>
+<tr>
+<td>EConversionError</td>
+<td>Raised by Convert</td>
+</tr>
+<tr>
+<td>EConvertError</td>
+<td>Object convert error</td>
+</tr>
+<tr>
+<td>EDatabaseError</td>
+<td>Database error</td>
+</tr>
+<tr>
+<td>EExternal</td>
+<td>Hardware/Windows error</td>
+</tr>
+<tr>
+<td>EAccessViolation</td>
+<td>Access violation</td>
+</tr>
+<tr>
+<td>EControlC</td>
+<td>User abort occured</td>
+</tr>
+<tr>
+<td>EExternalException</td>
+<td>Other Internal error</td>
+</tr>
+<tr>
+<td>EIntError</td>
+<td>Integer calc error</td>
+</tr>
+<tr>
+<td>EDivByZero</td>
+<td>Integer Divide by zero</td>
+</tr>
+<tr>
+<td>EIntOverflow</td>
+<td>Integer overflow</td>
+</tr>
+<tr>
+<td>ERangeError</td>
+<td>Out of value range</td>
+</tr>
+<tr>
+<td>EMathError</td>
+<td>Floating point error</td>
+</tr>
+<tr>
+<td>EInvalidArgument</td>
+<td>Bad argument value</td>
+</tr>
+<tr>
+<td>EInvalidOp</td>
+<td>Inappropriate operation</td>
+</tr>
+<tr>
+<td>EOverflow</td>
+<td>Value too large</td>
+</tr>
+<tr>
+<td>EUnderflow</td>
+<td>Value too small</td>
+</tr>
+<tr>
+<td>EZeroDivide</td>
+<td>Floating Divide by zero</td>
+</tr>
+<tr>
+<td>EStackOverflow</td>
+<td>Severe Delphi problem</td>
+</tr>
+<tr>
+<td>EHeapException</td>
+<td>Dynamic memory problem</td>
+</tr>
+<tr>
+<td>EInvalidPointer</td>
+<td>Bad memory pointer</td>
+</tr>
+<tr>
+<td>EOutOfMemory</td>
+<td>Cannot allocate memory</td>
+</tr>
+<tr>
+<td>EInOutError</td>
+<td>IO error</td>
+</tr>
+<tr>
+<td>EInvalidCast</td>
+<td>Object casting error</td>
+</tr>
+<tr>
+<td>EInvalidOperation</td>
+<td>Bad component op</td>
+</tr>
+<tr>
+<td>EMenuError</td>
+<td>Menu item error</td>
+</tr>
+<tr>
+<td>EOSError</td>
+<td>Operating system error</td>
+</tr>
+<tr>
+<td>EParserError</td>
+<td>Parsing error</td>
+</tr>
+<tr>
+<td>EPrinter</td>
+<td>Printer error</td>
+</tr>
+<tr>
+<td>EPropertyError</td>
+<td>Class property error#</td>
+</tr>
+<tr>
+<td>EPropReadOnly</td>
+<td>Invalid property access</td>
+</tr>
+<tr>
+<td>EPropWriteOnly</td>
+<td>Invalid property access</td>
+</tr>
+<tr>
+<td>EThread</td>
+<td>Thread error</td>
+</tr>
+<tr>
+<td>EVariantError</td>
+<td>Variant problem</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-dates-and-times">4. Dates and times</h1>
+<h2 id="41-tdatetime">4.1. TDateTime</h2>
+<p>Date and time processing depends on the <code>TDateTime</code> variable.</p>
+<p>It is used to hold a date and time combination. It is also used to hold just date or time values - the time and date value is ignored respectively.</p>
+<p><code>TDateTime</code> is defined in the <code>System</code> unit. Date constants and routines are defined in <code>SysUtils</code> and <code>DateUtils</code> units.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  date1, date2, date3 : TDateTime;       <span class="hljs-comment">// TDateTime variables</span>
+<span class="hljs-keyword">begin</span>
+  date1 := Yesterday;      <span class="hljs-comment">// Set to the start of yesterday</span>
+  date2 := Date;           <span class="hljs-comment">// Set to the start of the current day</span>
+  date3 := Tomorrow;       <span class="hljs-comment">// Set to the start of tomorrow</span>
+  date4 := Now;            <span class="hljs-comment">// Set to the current day and time</span>
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>date1 is set to something like 12/12/2002 00:00:00
+date2 is set to something like 13/12/2002 00:00:00
+date3 is set to something like 14/12/2002 00:00:00
+date4 is set to something like 13/12/2002 08:15:45
+</div></code></code></pre>
+<h2 id="42-short-and-long-month-names">4.2. Short and long month names</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  month : Integer;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">for</span> month := <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-number">12</span> <span class="hljs-keyword">do</span>    <span class="hljs-comment">// Display the short and long month names</span>
+  <span class="hljs-keyword">begin</span>
+    ShowMessage(ShortMonthNames[month]);
+    ShowMessage(LongMonthNames[month]);
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Jan
+January
+Feb
+February
+Mar
+March
+Apr
+April
+May
+May
+Jun
+June
+Jul
+July
+Aug
+August
+Sep
+September
+Oct
+October
+Nov
+November
+Dec
+December
+</div></code></code></pre>
+<h2 id="43-short-and-long-day-names">4.3. Short and long day names</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  day : Integer;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">for</span> day := <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-number">12</span> <span class="hljs-keyword">do</span>    <span class="hljs-comment">// Display the short and long day names</span>
+  <span class="hljs-keyword">begin</span>
+    ShowMessage(ShortDayNames[day]);
+    ShowMessage(LongDayNames[day]);
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Sun
+Sunday
+Mon
+Monday
+Tue
+Tuesday
+Wed
+Wednesday
+Thu
+Thursday
+Fri
+Friday
+Sat
+Saturday
+</div></code></code></pre>
+<h2 id="44-date-and-time-calculations">4.4. Date and time calculations</h2>
+<pre><code class="language-pas"><div>DayOfTheMonth <span class="hljs-comment">// Gives the day of month index for a TDateTime value</span>
+DaysBetween   <span class="hljs-comment">// Gives the whole number of days between 2 dates</span>
+DaysInAMonth  <span class="hljs-comment">// Gives the number of days in a month</span>
+DaysInAYear   <span class="hljs-comment">// Gives the number of days in a year</span>
+DecodeDate    <span class="hljs-comment">// Extracts the year, month, day values from a TDateTime var.</span>
+EncodeDate    <span class="hljs-comment">// Build a TDateTime value from year, month and day values</span>
+IncDay        <span class="hljs-comment">// Increments a TDateTime variable by + or - number of days</span>
+IsLeapYear    <span class="hljs-comment">// Returns true if a given calendar year is a leap year</span>
+MinsPerDay    <span class="hljs-comment">// Gives the number of minutes in a day </span>
+</div></code></pre>
+<h2 id="45-displaying-date-and-time-values">4.5. Displaying date and time values</h2>
+<h3 id="451-displaying-date-and-time-values">4.5.1. Displaying date and time values</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  myDate : TDateTime;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Set up our TDateTime variable with a full date and time :</span>
+  <span class="hljs-comment">// 09/02/2000 at 05:06:07.008 (.008 milli-seconds)</span>
+  myDate := EncodeDateTime(<span class="hljs-number">2000</span>, <span class="hljs-number">2</span>, <span class="hljs-number">9</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>);
+
+  <span class="hljs-comment">// Date only - numeric values with no leading zeroes (except year)</span>
+  ShowMessage(<span class="hljs-string">&#x27;              d/m/y = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;d/m/y&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Date only - numeric values with leading zeroes</span>
+  ShowMessage(<span class="hljs-string">&#x27;           dd/mm/yy = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;dd/mm/yy&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use short names for the day, month, and add freeform text (&#x27;of&#x27;)</span>
+  ShowMessage(<span class="hljs-string">&#x27;  ddd d of mmm yyyy = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;ddd d of mmm yyyy&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use long names for the day and month</span>
+  ShowMessage(<span class="hljs-string">&#x27;dddd d of mmmm yyyy = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;dddd d of mmmm yyyy&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use the ShortDateFormat settings only</span>
+  ShowMessage(<span class="hljs-string">&#x27;              ddddd = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;ddddd&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use the LongDateFormat settings only</span>
+  ShowMessage(<span class="hljs-string">&#x27;             dddddd = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;dddddd&#x27;</span>, myDate));
+
+  ShowMessage(<span class="hljs-string">&#x27;&#x27;</span>);
+
+  <span class="hljs-comment">// Time only - numeric values with no leading zeroes</span>
+  ShowMessage(<span class="hljs-string">&#x27;            h:n:s.z = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;h:n:s.z&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Time only - numeric values with leading zeroes</span>
+  ShowMessage(<span class="hljs-string">&#x27;       hh:nn:ss.zzz = &#x27;</span>+
+              FormatDateTime(<span class="hljs-string">&#x27;hh:nn:ss.zzz&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use the ShortTimeFormat settings only</span>
+  ShowMessage(<span class="hljs-string">&#x27;                  t = &#x27;</span>+FormatDateTime(<span class="hljs-string">&#x27;t&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use the LongTimeFormat settings only</span>
+  ShowMessage(<span class="hljs-string">&#x27;                 tt = &#x27;</span>+FormatDateTime(<span class="hljs-string">&#x27;tt&#x27;</span>, myDate));
+
+  <span class="hljs-comment">// Use the ShortDateFormat + LongTimeFormat settings</span>
+  ShowMessage(<span class="hljs-string">&#x27;                  c = &#x27;</span>+FormatDateTime(<span class="hljs-string">&#x27;c&#x27;</span>, myDate));
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>              d/m/y = 9/2/00
+          dd/mm/yy = 09/02/00
+  ddd d of mmm yyyy = Wed 9 of Feb 2000
+dddd d of mmmm yyyy = Wednesday 9 of February 2000
+              ddddd = 09/02/2000
+            dddddd = 09 February 2000
+                  c = 09/02/2000 05:06:07
+
+            h:n:s.z = 5:6:7.008
+      hh:nn:ss.zzz = 05:06:07.008
+                  t = 05:06
+                tt = 05:06:07
+                  c = 09/02/2000 05:06:07
+</div></code></code></pre>
+<h3 id="452-formatting-control-variables">4.5.2. Formatting control variables</h3>
+<pre><code class="language-pas"><div>DateSeparator              = /
+TimeSeparator              = :
+ShortDateFormat            = dd/mm/yyyy
+LongDateFormat             = dd mmm yyyy
+TimeAMString               = AM
+TimePMString               = PM
+ShortTimeFormat            = hh:mm
+LongTimeFormat             = hh:mm:ss
+ShortMonthNames            = Jan Feb ...
+LongMonthNames             = January, February ...
+ShortDayNames              = Sun, Mon ...
+LongDayNames               = Sunday, Monday ...
+TwoDigitYearCenturyWindow  = <span class="hljs-number">50</span> 
+</div></code></pre>
+<h1 id="5-files">5. Files</h1>
+<h2 id="51-accessing-files">5.1. Accessing files</h2>
+<p>First, we must get a <strong>handle</strong> for a named file:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  myFile : TextFile;
+
+<span class="hljs-keyword">begin</span>
+  AssignFile(myFile, <span class="hljs-string">&#x27;Test.txt&#x27;</span>);
+</div></code></pre>
+<p>Here we are getting a <strong>handle</strong> to a text file, designated by the <code>TextFile</code> type (binary files are of type <code>File</code>). We ask Delphi to assign a file handle for a file called <code>'Test.txt'</code> which will be assumed to be in the current directory <em>(as given by the GetCurrentDir routine)</em>.</p>
+<pre><code class="language-pas"><div>`ReWrite` Opens a <span class="hljs-keyword">file</span> <span class="hljs-keyword">as</span> new - discards existing contents <span class="hljs-keyword">if</span> <span class="hljs-keyword">file</span> exists
+`Reset` Opens a <span class="hljs-keyword">file</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">read</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">write</span> access
+`Append` Opens a <span class="hljs-keyword">file</span> <span class="hljs-keyword">for</span> appending <span class="hljs-keyword">to</span> the <span class="hljs-keyword">end</span> (such <span class="hljs-keyword">as</span> a log <span class="hljs-keyword">file</span>)
+</div></code></pre>
+<p>When we have finished, we must close the file:</p>
+<pre><code class="language-pas"><div>CloseFile(myFile);
+</div></code></pre>
+<h2 id="52-reading-and-writing-to-text-files">5.2. Reading and writing to text files</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  myFile : TextFile;
+  text   : <span class="hljs-keyword">string</span>;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Try to open the Test.txt file for writing to</span>
+  AssignFile(myFile, <span class="hljs-string">&#x27;Test.txt&#x27;</span>);
+  ReWrite(myFile);
+
+  <span class="hljs-comment">// Write a couple of well known words to this file</span>
+  WriteLn(myFile, <span class="hljs-string">&#x27;Hello&#x27;</span>);
+  WriteLn(myFile, <span class="hljs-string">&#x27;World&#x27;</span>);
+
+  <span class="hljs-comment">// Close the file</span>
+  CloseFile(myFile);
+
+  <span class="hljs-comment">// Reopen the file for reading</span>
+  Reset(myFile);
+
+  <span class="hljs-comment">// Display the file contents</span>
+  <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> Eof(myFile) <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    ReadLn(myFile, text);
+    ShowMessage(text);
+  <span class="hljs-keyword">end</span>;
+
+  <span class="hljs-comment">// Close the file for the last time</span>
+  CloseFile(myFile);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Hello
+World
+</div></code></code></pre>
+<p>If we replaced the <code>ReWrite</code> routine with <code>Append</code>, and rerun the code, the existing file would then contain:</p>
+<pre><code><code><div>Hello
+World
+Hello
+World
+</div></code></code></pre>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  myFile : TextFile;
+  text   : <span class="hljs-keyword">string</span>;
+  i      : Integer;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Try to open the Test.txt file for writing to</span>
+  AssignFile(myFile, <span class="hljs-string">&#x27;Test.txt&#x27;</span>);
+  ReWrite(myFile);
+
+  <span class="hljs-comment">// Write a couple of well known words to this file</span>
+  <span class="hljs-keyword">Write</span>(myFile, <span class="hljs-string">&#x27;Hello &#x27;</span>);
+  <span class="hljs-keyword">Write</span>(myFile, <span class="hljs-string">&#x27;World&#x27;</span>);
+
+  <span class="hljs-comment">// Terminate this line</span>
+  WriteLn(myFile);
+
+  <span class="hljs-comment">// Write some numbers to the file as a single line</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">2</span> <span class="hljs-keyword">to</span> <span class="hljs-number">4</span> <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">Write</span>(myFile, i/<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;  &#x27;</span>);
+
+  <span class="hljs-comment">// Terminate this line</span>
+  WriteLn(myFile);
+
+  <span class="hljs-comment">// repeat the above, but with number formatting</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">2</span> <span class="hljs-keyword">to</span> <span class="hljs-number">4</span> <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">Write</span>(myFile, i/<span class="hljs-number">2</span>:<span class="hljs-number">5</span>:<span class="hljs-number">1</span>);
+
+  <span class="hljs-comment">// Terminate this line</span>
+  WriteLn(myFile);
+
+  <span class="hljs-comment">// Close the file</span>
+  CloseFile(myFile);
+
+  <span class="hljs-comment">// Reopen the file for reading only</span>
+  Reset(myFile);
+
+  <span class="hljs-comment">// Display the file contents</span>
+  <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> Eof(myFile) <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    ReadLn(myFile, text);
+    ShowMessage(text);
+  <span class="hljs-keyword">end</span>;
+
+  <span class="hljs-comment">// Close the file for the last time</span>
+  CloseFile(myFile);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Hello World
+1.00000000000000E+0000  1.50000000000000E+0000  2.00000000000000E+0000
+1.0  1.5  2.0
+</div></code></code></pre>
+<h3 id="521-example-code--reading-one-character-at-a-time-from-a-text-file-line">5.2.1. Example code : Reading one character at a time from a text file line</h3>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  myFile : TextFile;
+  letter : char;
+  text   : <span class="hljs-keyword">string</span>;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Try to open the Test.txt file for writing to</span>
+  AssignFile(myFile, <span class="hljs-string">&#x27;Test.txt&#x27;</span>);
+  ReWrite(myFile);
+
+  <span class="hljs-comment">// Write lines of text to the file</span>
+  WriteLn(myFile, <span class="hljs-string">&#x27;Hello&#x27;</span>);
+  WriteLn(myFile, <span class="hljs-string">&#x27;To you&#x27;</span>);
+
+  <span class="hljs-comment">// Close the file</span>
+  CloseFile(myFile);
+
+  <span class="hljs-comment">// Reopen the file for reading</span>
+  Reset(myFile);
+
+  <span class="hljs-comment">// Display the file contents</span>
+  <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> Eof(myFile) <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    <span class="hljs-comment">// Proces one line at a time</span>
+    ShowMessage(<span class="hljs-string">&#x27;Start of a new line :&#x27;</span>);
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> Eoln(myFile) <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">begin</span>
+      <span class="hljs-keyword">Read</span>(myFile, letter);   <span class="hljs-comment">// Read and display one letter at a time</span>
+      ShowMessage(letter);
+    <span class="hljs-keyword">end</span>;
+    ReadLn(myFile, text);
+  <span class="hljs-keyword">end</span>;
+
+  <span class="hljs-comment">// Close the file for the last time</span>
+  CloseFile(myFile);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Start of a new line :
+H
+e
+l
+l
+o
+Start of a new line :
+T
+o
+
+y
+o
+u
+</div></code></code></pre>
+<h2 id="53-reading-and-writing-to-typed-binary-files">5.3. Reading and writing to typed binary files</h2>
+<p>Typed binary files are files that have a data type as the basic unit of writing and reading. You write, say, an Integer, or a Record to a file, and read the same unit of data back. Records are particularly useful, allowing us to store any mix of data types in the one file unit of data.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+  TCustomer = <span class="hljs-keyword">Record</span>
+    <span class="hljs-keyword">name</span> : <span class="hljs-keyword">string</span>[<span class="hljs-number">20</span>];
+    age  : Integer;
+    male : Boolean;
+  <span class="hljs-keyword">end</span>;
+
+<span class="hljs-keyword">var</span>
+  myFile   : <span class="hljs-keyword">File</span> <span class="hljs-keyword">of</span> TCustomer;  <span class="hljs-comment">// A file of customer records</span>
+  customer : TCustomer;          <span class="hljs-comment">// A customer record variable</span>
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Try to open the Test.cus binary file for writing to</span>
+  AssignFile(myFile, <span class="hljs-string">&#x27;Test.cus&#x27;</span>);
+  ReWrite(myFile);
+
+  <span class="hljs-comment">// Write a couple of customer records to the file</span>
+  customer.<span class="hljs-keyword">name</span> := <span class="hljs-string">&#x27;Fred Bloggs&#x27;</span>;
+  customer.age  := <span class="hljs-number">21</span>;
+  customer.male := true;
+  <span class="hljs-keyword">Write</span>(myFile, customer);
+
+  customer.<span class="hljs-keyword">name</span> := <span class="hljs-string">&#x27;Jane Turner&#x27;</span>;
+  customer.age  := <span class="hljs-number">45</span>;
+  customer.male := false;
+  <span class="hljs-keyword">Write</span>(myFile, customer);
+
+  <span class="hljs-comment">// Close the file</span>
+  CloseFile(myFile);
+
+  <span class="hljs-comment">// Reopen the file in read only mode</span>
+  FileMode := fmOpenRead;
+  Reset(myFile);
+
+  <span class="hljs-comment">// Display the file contents</span>
+  <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> Eof(myFile) <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">Read</span>(myFile, customer);
+    <span class="hljs-keyword">if</span> customer.male
+    <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;Man with name &#x27;</span>+customer.<span class="hljs-keyword">name</span>+
+                    <span class="hljs-string">&#x27; is &#x27;</span>+IntToStr(customer.age))
+    <span class="hljs-keyword">else</span> ShowMessage(<span class="hljs-string">&#x27;Lady with name &#x27;</span>+customer.<span class="hljs-keyword">name</span>+
+                    <span class="hljs-string">&#x27; is &#x27;</span>+IntToStr(customer.age));
+  <span class="hljs-keyword">end</span>;
+
+  <span class="hljs-comment">// Close the file for the last time</span>
+  CloseFile(myFile);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Man with name Fred Bloggs is 21
+Lady with name Jane Turner is 45
+</div></code></code></pre>
+<h2 id="54-reading-and-writing-to-pure-binary-files">5.4. Reading and writing to pure binary files</h2>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  myFile    : <span class="hljs-keyword">File</span>;
+  byteArray : <span class="hljs-keyword">array</span>[<span class="hljs-number">1</span>..<span class="hljs-number">8</span>] <span class="hljs-keyword">of</span> byte;
+  oneByte   : byte;
+  i, count  : Integer;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Try to open the Test.byt file for writing to</span>
+  AssignFile(myFile, <span class="hljs-string">&#x27;Test.byt&#x27;</span>);
+  ReWrite(myFile, <span class="hljs-number">4</span>);   <span class="hljs-comment">// Define a single &#x27;record&#x27; as 4 bytes</span>
+
+  <span class="hljs-comment">// Fill out the data array</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-number">8</span> <span class="hljs-keyword">do</span>
+    byteArray[i] := i;
+
+  <span class="hljs-comment">// Write the data array to the file</span>
+  BlockWrite(myFile, byteArray, <span class="hljs-number">2</span>);   <span class="hljs-comment">// Write 2 &#x27;records&#x27; of 4 bytes</span>
+
+  <span class="hljs-comment">// Fill out the data array with different data</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-number">4</span> <span class="hljs-keyword">do</span>
+    byteArray[i] := i*i;              <span class="hljs-comment">// Value : 1, 4, 9, 16</span>
+
+  <span class="hljs-comment">// Write only the first 4 items from the data array to the file</span>
+  BlockWrite(myFile, byteArray, <span class="hljs-number">1</span>);   <span class="hljs-comment">// Write 1 record of 4 bytes</span>
+
+  <span class="hljs-comment">// Close the file</span>
+  CloseFile(myFile);
+
+  <span class="hljs-comment">// Reopen the file for reading only</span>
+  FileMode := fmOpenRead;
+  Reset(myFile, <span class="hljs-number">1</span>);   <span class="hljs-comment">// Now we define one record as 1 byte</span>
+
+  <span class="hljs-comment">// Display the file contents</span>
+  <span class="hljs-comment">// Start with a read of the first 6 bytes. &#x27;count&#x27; is set to the</span>
+  <span class="hljs-comment">// actual number read</span>
+  ShowMessage(<span class="hljs-string">&#x27;Reading first set of bytes :&#x27;</span>);
+  BlockRead(myFile, byteArray, <span class="hljs-number">6</span>, count);
+
+  <span class="hljs-comment">// Display the byte values read</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> count <span class="hljs-keyword">do</span>
+    ShowMessage(IntToStr(byteArray[i]));
+
+  <span class="hljs-comment">// Now read one byte at a time to the end of the file</span>
+  ShowMessage(<span class="hljs-string">&#x27;Reading remaining bytes :&#x27;</span>);
+  <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> Eof(myFile) <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    BlockRead(myFile, oneByte, <span class="hljs-number">1</span>);   <span class="hljs-comment">// Read and display one byte at a time</span>
+    ShowMessage(IntToStr(oneByte));
+  <span class="hljs-keyword">end</span>;
+
+  <span class="hljs-comment">// Close the file for the last time</span>
+  CloseFile(myFile);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Reading first set of bytes :
+1
+2
+3
+4
+5
+6
+Reading remaining bytes :
+7
+8
+1
+4
+9
+16
+</div></code></code></pre>
+<h2 id="55-other-file-processing-mechanisms">5.5. Other file processing mechanisms</h2>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FilePos</code></td>
+<td>Gives the file position in a binary or text file</td>
+</tr>
+<tr>
+<td><code>Seek</code></td>
+<td>Moves to a new position in the file</td>
+</tr>
+<tr>
+<td><code>SeekEof</code></td>
+<td>Skip to the end of the current line or file</td>
+</tr>
+<tr>
+<td><code>SeekEoln</code></td>
+<td>Skip to the end of the current line or file</td>
+</tr>
+</tbody>
+</table>
+<h2 id="56-getting-information-about-files-and-directories">5.6. Getting information about files and directories</h2>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ChDir</code></td>
+<td>Change the working drive plus path for a specified drive</td>
+</tr>
+<tr>
+<td><code>CreateDir</code></td>
+<td>Create a directory</td>
+</tr>
+<tr>
+<td><code>DeleteFile</code></td>
+<td>Delete a file specified by its file name</td>
+</tr>
+<tr>
+<td><code>Erase</code></td>
+<td>Erase a file</td>
+</tr>
+<tr>
+<td><code>FileExists</code></td>
+<td>Returns true if the given file exists</td>
+</tr>
+<tr>
+<td><code>FileSearch</code></td>
+<td>Search for a file in one or more directories</td>
+</tr>
+<tr>
+<td><code>FileSetDate</code></td>
+<td>Set the last modified date and time of a file</td>
+</tr>
+<tr>
+<td><code>Flush</code></td>
+<td>Flushes buffered text file data to the file</td>
+</tr>
+<tr>
+<td><code>GetCurrentDir</code></td>
+<td>Get the current directory (drive plus directory)</td>
+</tr>
+<tr>
+<td><code>MkDir</code></td>
+<td>Make a directory</td>
+</tr>
+<tr>
+<td><code>RemoveDir</code></td>
+<td>Remove a directory</td>
+</tr>
+<tr>
+<td><code>Rename</code></td>
+<td>Rename a file</td>
+</tr>
+<tr>
+<td><code>RenameFile</code></td>
+<td>Rename a file or directory</td>
+</tr>
+<tr>
+<td><code>RmDir</code></td>
+<td>Remove a directory</td>
+</tr>
+<tr>
+<td><code>SelectDirectory</code></td>
+<td>Display a dialog to allow user selection of a directory</td>
+</tr>
+<tr>
+<td><code>SetCurrentDir</code></td>
+<td>Change the current directory</td>
+</tr>
+<tr>
+<td><code>Truncate</code></td>
+<td>Truncates a file size</td>
+</tr>
+</tbody>
+</table>
+<h2 id="57-using-tstringlist-to-read-and-write-text-files">5.7. Using TStringList to read and write text files</h2>
+<p>The <code>TStringList</code> class is a very useful utility class that works on a lits of strings, each indexable like an array. The list can be sorted, and supports name/value pair strings, allowing selection by name or value.</p>
+<p>These lists can be furnished from text files in one fell swoop.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  fileData : TStringList;                <span class="hljs-comment">// Our TStringList variable</span>
+<span class="hljs-keyword">begin</span>
+  fileData := TStringList.Create;        <span class="hljs-comment">// Create the TSTringList object</span>
+  fileData.LoadFromFile(<span class="hljs-string">&#x27;Testing.txt&#x27;</span>);  <span class="hljs-comment">// Load from Testing.txt file</span>
+  ...
+</div></code></pre>
+<p>We can display the whole file in a <code>Memo box</code>:</p>
+<pre><code class="language-pas"><div>memoBox.Text := fileData.Text;
+</div></code></pre>
+<p>And we can display or process the file with direct access to any line at any time. In the example code below, we open a text file, reverse all lines in the file, and then save it back. Not terribly useful, but it shows the power of TStringList.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  fileData : TStringList;
+  saveLine : <span class="hljs-keyword">String</span>;
+  lines, i : Integer;
+<span class="hljs-keyword">begin</span>
+  fileData := TStringList.Create;        <span class="hljs-comment">// Create the TSTringList object</span>
+  fileData.LoadFromFile(<span class="hljs-string">&#x27;Test.txt&#x27;</span>);     <span class="hljs-comment">// Load from Testing.txt file</span>
+
+  <span class="hljs-comment">// Reverse the sequence of lines in the file</span>
+  lines := fileData.Count;
+
+  <span class="hljs-keyword">for</span> i := lines-<span class="hljs-number">1</span> <span class="hljs-keyword">downto</span> (lines <span class="hljs-keyword">div</span> <span class="hljs-number">2</span>) <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    saveLine := fileData[lines-i-<span class="hljs-number">1</span>];
+    fileData[lines-i-<span class="hljs-number">1</span>] := fileData[i];
+    fileData[i] := saveLine;
+  <span class="hljs-keyword">end</span>;
+
+  <span class="hljs-comment">// Now display the file</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> lines-<span class="hljs-number">1</span> <span class="hljs-keyword">do</span>
+    ShowMessage(fileData[i]);
+
+  fileData.SaveToFile(<span class="hljs-string">&#x27;Test.txt&#x27;</span>);       <span class="hljs-comment">// Save the reverse sequence file</span>
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+
+    </body>
+    </html>
