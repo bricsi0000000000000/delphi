@@ -61,6 +61,7 @@
   - [8.2. Dialog](#82-dialog)
     - [8.2.1. Confirmation dialog](#821-confirmation-dialog)
     - [8.2.2. Custom dialog with custom button selection](#822-custom-dialog-with-custom-button-selection)
+  - [Picture](#picture)
 - [9. Good to know](#9-good-to-know)
   - [9.1. Generate random character](#91-generate-random-character)
 
@@ -1862,6 +1863,12 @@ begin
   if buttonSelected = mrAll    then ShowMessage('All pressed');
   if buttonSelected = mrCancel then ShowMessage('Cancel pressed');
 end;
+```
+
+## Picture
+
+```pas
+PlayerCard1.Picture.LoadFromFile('C:\Users\w\Desktop\delphi\black_jack\images\AC.PNG');
 ```
 
 # 9. Good to know
