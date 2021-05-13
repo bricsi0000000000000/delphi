@@ -12,58 +12,68 @@
   - [1.6. Compound data types](#16-compound-data-types)
     - [1.6.1. Arrays](#161-arrays)
     - [1.6.2. Records](#162-records)
-- [2. Programming logic](#2-programming-logic)
-  - [2.1. If then else](#21-if-then-else)
-  - [2.2. Case statements](#22-case-statements)
-    - [2.2.1. A simple numerical case statement](#221-a-simple-numerical-case-statement)
-    - [2.2.2. Using the otherwise clause](#222-using-the-otherwise-clause)
-    - [2.2.3. Using enumeration case values](#223-using-enumeration-case-values)
-  - [2.3. Loops](#23-loops)
-    - [2.3.1. For](#231-for)
-    - [2.3.2. Repeat](#232-repeat)
-    - [2.3.3. While](#233-while)
-  - [2.4. Subroutines](#24-subroutines)
-    - [2.4.1. A procedure without parameters](#241-a-procedure-without-parameters)
-    - [2.4.2. A procedure with parameters](#242-a-procedure-with-parameters)
-    - [2.4.3. A function without parameters](#243-a-function-without-parameters)
-    - [2.4.4. A function with parameters](#244-a-function-with-parameters)
-    - [2.4.5. Passing data by reference](#245-passing-data-by-reference)
-    - [2.4.6. Output only parameters](#246-output-only-parameters)
-    - [2.4.7. Constant value parameters](#247-constant-value-parameters)
-    - [2.4.8. Same routine, different parameters](#248-same-routine-different-parameters)
-- [3. Exception handling](#3-exception-handling)
-  - [3.1. Try, except](#31-try-except)
-  - [3.2. Raising exceptions](#32-raising-exceptions)
-- [4. Dates and times](#4-dates-and-times)
-  - [4.1. TDateTime](#41-tdatetime)
-  - [4.2. Short and long month names](#42-short-and-long-month-names)
-  - [4.3. Short and long day names](#43-short-and-long-day-names)
-  - [4.4. Date and time calculations](#44-date-and-time-calculations)
-  - [4.5. Displaying date and time values](#45-displaying-date-and-time-values)
-    - [4.5.1. Displaying date and time values](#451-displaying-date-and-time-values)
-    - [4.5.2. Formatting control variables](#452-formatting-control-variables)
-- [5. Files](#5-files)
-  - [5.1. Accessing files](#51-accessing-files)
-  - [5.2. Reading and writing to text files](#52-reading-and-writing-to-text-files)
-    - [5.2.1. Example code : Reading one character at a time from a text file line](#521-example-code--reading-one-character-at-a-time-from-a-text-file-line)
-  - [5.3. Reading and writing to typed binary files](#53-reading-and-writing-to-typed-binary-files)
-  - [5.4. Reading and writing to pure binary files](#54-reading-and-writing-to-pure-binary-files)
-  - [5.5. Other file processing mechanisms](#55-other-file-processing-mechanisms)
-  - [5.6. Getting information about files and directories](#56-getting-information-about-files-and-directories)
-  - [5.7. Using TStringList to read and write text files](#57-using-tstringlist-to-read-and-write-text-files)
-- [6. Conversions](#6-conversions)
-  - [6.1. Integer to string](#61-integer-to-string)
-  - [6.2. Float to string](#62-float-to-string)
-  - [6.3. String to integer](#63-string-to-integer)
-- [7. Format](#7-format)
-- [8. UI elements](#8-ui-elements)
-  - [8.1. Label](#81-label)
-  - [8.2. Dialog](#82-dialog)
-    - [8.2.1. Confirmation dialog](#821-confirmation-dialog)
-    - [8.2.2. Custom dialog with custom button selection](#822-custom-dialog-with-custom-button-selection)
-  - [Picture](#picture)
-- [9. Good to know](#9-good-to-know)
-  - [9.1. Generate random character](#91-generate-random-character)
+- [2. Operators](#2-operators)
+  - [2.1. Binary Arithmetic Operators](#21-binary-arithmetic-operators)
+  - [2.2. Unary arithmetic operators:](#22-unary-arithmetic-operators)
+  - [2.3. Boolean Operators:](#23-boolean-operators)
+  - [2.4. Logical (Bitwise) Operators:](#24-logical-bitwise-operators)
+  - [2.5. String Operators:](#25-string-operators)
+  - [2.6. Relational Operators:](#26-relational-operators)
+  - [2.7. Precedence of operators](#27-precedence-of-operators)
+- [3. Programming logic](#3-programming-logic)
+  - [3.1. If then else](#31-if-then-else)
+  - [3.2. Case statements](#32-case-statements)
+    - [3.2.1. A simple numerical case statement](#321-a-simple-numerical-case-statement)
+    - [3.2.2. Using the otherwise clause](#322-using-the-otherwise-clause)
+    - [3.2.3. Using enumeration case values](#323-using-enumeration-case-values)
+  - [3.3. Loops](#33-loops)
+    - [3.3.1. For](#331-for)
+    - [3.3.2. Repeat](#332-repeat)
+    - [3.3.3. While](#333-while)
+  - [3.4. Subroutines](#34-subroutines)
+    - [3.4.1. A procedure without parameters](#341-a-procedure-without-parameters)
+    - [3.4.2. A procedure with parameters](#342-a-procedure-with-parameters)
+    - [3.4.3. A function without parameters](#343-a-function-without-parameters)
+    - [3.4.4. A function with parameters](#344-a-function-with-parameters)
+    - [3.4.5. Passing data by reference](#345-passing-data-by-reference)
+    - [3.4.6. Output only parameters](#346-output-only-parameters)
+    - [3.4.7. Constant value parameters](#347-constant-value-parameters)
+    - [3.4.8. Same routine, different parameters](#348-same-routine-different-parameters)
+- [4. Exception handling](#4-exception-handling)
+  - [4.1. Try, except](#41-try-except)
+  - [4.2. Raising exceptions](#42-raising-exceptions)
+- [5. Dates and times](#5-dates-and-times)
+  - [5.1. TDateTime](#51-tdatetime)
+  - [5.2. Short and long month names](#52-short-and-long-month-names)
+  - [5.3. Short and long day names](#53-short-and-long-day-names)
+  - [5.4. Date and time calculations](#54-date-and-time-calculations)
+  - [5.5. Displaying date and time values](#55-displaying-date-and-time-values)
+    - [5.5.1. Displaying date and time values](#551-displaying-date-and-time-values)
+    - [5.5.2. Formatting control variables](#552-formatting-control-variables)
+- [6. Files](#6-files)
+  - [6.1. Accessing files](#61-accessing-files)
+  - [6.2. Reading and writing to text files](#62-reading-and-writing-to-text-files)
+    - [6.2.1. Example code : Reading one character at a time from a text file line](#621-example-code--reading-one-character-at-a-time-from-a-text-file-line)
+  - [6.3. Reading and writing to typed binary files](#63-reading-and-writing-to-typed-binary-files)
+  - [6.4. Reading and writing to pure binary files](#64-reading-and-writing-to-pure-binary-files)
+  - [6.5. Other file processing mechanisms](#65-other-file-processing-mechanisms)
+  - [6.6. Getting information about files and directories](#66-getting-information-about-files-and-directories)
+  - [6.7. Using TStringList to read and write text files](#67-using-tstringlist-to-read-and-write-text-files)
+- [7. Conversions](#7-conversions)
+  - [7.1. Integer to string](#71-integer-to-string)
+  - [7.2. Float to string](#72-float-to-string)
+  - [7.3. String to integer](#73-string-to-integer)
+  - [7.4. Tryparse string to integer](#74-tryparse-string-to-integer)
+- [8. Format](#8-format)
+- [9. UI elements](#9-ui-elements)
+  - [9.1. Label](#91-label)
+  - [9.2. Dialog](#92-dialog)
+    - [9.2.1. Confirmation dialog](#921-confirmation-dialog)
+    - [9.2.2. Custom dialog with custom button selection](#922-custom-dialog-with-custom-button-selection)
+  - [9.3. Picture](#93-picture)
+- [10. Good to know](#10-good-to-know)
+  - [10.1. Generate random character](#101-generate-random-character)
+  - [10.2. Textbox `Edit` when press enter](#102-textbox-edit-when-press-enter)
 
 # 1. Data types
 
@@ -394,9 +404,90 @@ customer.lastName  is now set to 'Bloggs'
 customer.age       is now set to 55
 ```
 
-# 2. Programming logic
+# 2. Operators
 
-## 2.1. If then else
+## 2.1. Binary Arithmetic Operators
+
+| Operator | Operation        | Operand Types | Result Type   | Example            |
+| :------: | ---------------- | ------------- | ------------- | ------------------ |
+|   `+`    | addition         | integer, real | integer, real | X + Y              |
+|   `-`    | subtraction      | integer, real | integer, real | Result -1          |
+|   `*`    | multiplication   | integer, real | integer, real | P * InterestRate   |
+|   `/`    | real division    | integer, real | real          | X / 2              |
+|  `div`   | integer division | integer       | integer       | Total div UnitSize |
+|  `mod`   | remainder        | integer       | integer       | Y mod 6            |
+
+## 2.2. Unary arithmetic operators:
+
+| Operator | Operation     | Operand Types | Result Type   | Example |
+| :------: | ------------- | ------------- | ------------- | ------- |
+|   `+`    | sign identity | integer, real | integer, real | +7      |
+|   `-`    | sign negation | integer, real | integer, real | -X      |
+
+The following rules apply to arithmetic operators:
+- The value of `x / y` is of type `Extended`, regardless of the types of `x` and `y`. For other arithmetic operators, the result is of type `Extended` whenever at least one operand is a `real`, otherwise, the result is of type `Int64` when at least one operand is of type `Int64`, otherwise, the result is of type `Integer`. If an operand's type is a subrange of an integer type, it is treated as if it were of the integer type.
+- The value of `x div y` is the value of `x / y` rounded in the direction of zero to the nearest integer.
+- The `mod` operator returns the remainder obtained by dividing its operands. In other words,
+  - `x mod y = x - (x div y) * y`
+- A run-time error occurs when `y` is **zero** in an expression of the form
+  - `x / y`
+  - `x div y`
+  - `x mod y`
+
+## 2.3. Boolean Operators:
+
+| Operator | Operation             | Operand Types | Result Type | Example             |
+| :------: | --------------------- | ------------- | ----------- | ------------------- |
+|  `not`   | negation              | Boolean       | Boolean     | not (C in MySet)    |
+|  `and`   | conjunction           | Boolean       | Boolean     | Done and (Total >0) |
+|   `or`   | disjunction           | Boolean       | Boolean     | A or B              |
+|  `xor`   | exclusive disjunction | Boolean       | Boolean     | A xor B             |
+
+## 2.4. Logical (Bitwise) Operators:
+
+| Operator | Operation           | Operand Types | Result Type | Example |
+| :------: | ------------------- | ------------- | ----------- | ------- |
+|  `not`   | bitwise negation    | integer       | integer     | not X   |
+|  `and`   | bitwise and         | integer       | integer     | X and Y |
+|   `or`   | bitwise or          | integer       | integer     | X or Y  |
+|  `xor`   | bitwise xor         | integer       | integer     | X xor Y |
+|  `shl`   | bitwise shift left  | integer       | integer     | X shl 2 |
+|  `shr`   | bitwise shift right | integer       | integer     | Y shr I |
+
+The following rules apply to bitwise operators:
+
+- The result of a `not` operation is of the same type as the operand.
+- If the operands of an `and`, `or`, or `xor` operation are both integers, the result is of the predefined integer type with the smallest range that includes all possible values of both types.
+- The operations `x shl y` and `x shr y` shift the value of x to the left or right by y bits, which (if x is an unsigned integer) is equivalent to multiplying or dividing x by 2^y; the result is of the same type as x. For example, if N stores the value 01101 (decimal 13), then N shl 1 returns 11010 (decimal 26). Note that the value of y is interpreted modulo the size of the type of x. Thus for example, if x is an integer, x shl 40 is interpreted as x shl 8 because an integer is 32 bits and 40 mod 32 is 8.
+
+## 2.5. String Operators:
+
+| Operator | Operation     | Operand Types                    | Result Type | Example |
+| :------: | ------------- | -------------------------------- | ----------- | ------- |
+|   `+`    | concatenation | string, packed string, character | string      | S + '.' |
+
+## 2.6. Relational Operators:
+
+| Operator | Operation                | Operand Types                                                    | Result Type | Example  |
+| :------: | ------------------------ | ---------------------------------------------------------------- | ----------- | -------- |
+|   `=`    | equality                 | simple, class, class reference, interface, string, packed string | Boolean     | I = Max  |
+|   `<>`   | inequality               | simple, class, class reference, interface, string, packed string | Boolean     | X <> Y   |
+|   `<`    | less-than                | simple, string, packed string, PChar                             | Boolean     | X < Y    |
+|   `>`    | greater-than             | simple, string, packed string, PChar                             | Boolean     | Len > 0  |
+|   `<=`   | less-than-or-equal-to    | simple, string, packed string, PChar                             | Boolean     | Cnt <= I |
+|   `>=`   | greater-than-or-equal-to | simple, string, packed string, PChar                             | Boolean     | I >= 1   |
+
+## 2.7. Precedence of operators
+
+1. `@ not`
+2. `* div mod and shl shr as`
+3. `+ - or xor`
+4. `= <> < > <= >= in is`  
+
+
+# 3. Programming logic
+
+## 3.1. If then else
 
 ```pas
 var
@@ -444,9 +535,9 @@ if condition1
         else statement3;
 ```
 
-## 2.2. Case statements
+## 3.2. Case statements
 
-### 2.2.1. A simple numerical case statement
+### 3.2.1. A simple numerical case statement
 
 ```pas
 var
@@ -472,7 +563,7 @@ Random number was fifteen
 
 The `RandomRange` routine generates a random number between two given values. However, each time you run the program, it will always start with the same pseudo random value.
 
-### 2.2.2. Using the otherwise clause
+### 3.2.2. Using the otherwise clause
 
 ```pas
 var
@@ -498,7 +589,7 @@ var
 Unexpected number : 10
 ```
 
-### 2.2.3. Using enumeration case values
+### 3.2.3. Using enumeration case values
 
 ```pas
 type
@@ -522,9 +613,9 @@ type
 We have a Rover car
 ```
 
-## 2.3. Loops
+## 3.3. Loops
 
-### 2.3.1. For
+### 3.3.1. For
 
 ```pas
 var
@@ -595,7 +686,7 @@ Letter = B
 Letter = A
 ```
 
-### 2.3.2. Repeat
+### 3.3.2. Repeat
 
 ```pas
 var
@@ -635,7 +726,7 @@ end;
 Upon exit, i will be 7 (since Sqrt(7) > 2.5)
 ```
 
-### 2.3.3. While
+### 3.3.3. While
 
 ```pas
 var
@@ -653,9 +744,9 @@ end;
 Upon exit, i will be 7 (since Sqrt(7) > 2.5)
 ```
 
-## 2.4. Subroutines
+## 3.4. Subroutines
 
-### 2.4.1. A procedure without parameters
+### 3.4.1. A procedure without parameters
 
 ```pas
 procedure ShowTime;                    // A procedure with no parameters
@@ -674,7 +765,7 @@ ShowTime;
 Date and time is 12/12/2002 15:30:45
 ```
 
-### 2.4.2. A procedure with parameters
+### 3.4.2. A procedure with parameters
 
 ```pas
 procedure ShowTime(dateTime : TDateTime);  // With parameters
@@ -693,7 +784,7 @@ ShowTime(Yesterday);
 Date and time is 11/12/2002
 ```
 
-### 2.4.3. A function without parameters
+### 3.4.3. A function without parameters
 
 ```pas	
 function RandomChar : char;
@@ -718,7 +809,7 @@ ShowMessage('Char chosen is : '+RandomChar);
 Char chosen is : A
 ```
 
-### 2.4.4. A function with parameters
+### 3.4.4. A function with parameters
 	
 ```pas
 function Average(a, b, c : Extended) : Extended;
@@ -811,7 +902,7 @@ A in the procedure = 44
 A in program now = 22
 ```
 
-### 2.4.5. Passing data by reference
+### 3.4.5. Passing data by reference
 
 ```pas
 procedure DoIt(Var A : Integer);
@@ -840,7 +931,7 @@ A in the procedure = 44
 A in program now = 44
 ```
 
-### 2.4.6. Output only parameters
+### 3.4.6. Output only parameters
 
 ```pas
 procedure DoIt(Out A : Integer);
@@ -868,7 +959,7 @@ A in the procedure = 123
 A in program now = 123
 ```
 
-### 2.4.7. Constant value parameters
+### 3.4.7. Constant value parameters
 
 ```pas
 procedure DoIt(Const A : Integer; Out B : Integer);
@@ -893,7 +984,7 @@ end;
 B has been set to 44
 ```
 
-### 2.4.8. Same routine, different parameters
+### 3.4.8. Same routine, different parameters
 
 ```pas
 procedure DoIt; overload;
@@ -922,9 +1013,9 @@ DoIt with no parameters called
 DoIt called with parameter : Hi There
 ```
 
-# 3. Exception handling
+# 4. Exception handling
 
-## 3.1. Try, except
+## 4.1. Try, except
 
 ```pas
 begin
@@ -973,7 +1064,7 @@ except
   end;
 ```
 
-## 3.2. Raising exceptions
+## 4.2. Raising exceptions
 
 | exception name       | description             |
 | -------------------- | ----------------------- |
@@ -1019,9 +1110,9 @@ except
 | EThread              | Thread error            |
 | EVariantError        | Variant problem         |
 
-# 4. Dates and times
+# 5. Dates and times
 
-## 4.1. TDateTime
+## 5.1. TDateTime
 
 Date and time processing depends on the `TDateTime` variable.
 
@@ -1049,7 +1140,7 @@ date3 is set to something like 14/12/2002 00:00:00
 date4 is set to something like 13/12/2002 08:15:45
 ```
 
-## 4.2. Short and long month names
+## 5.2. Short and long month names
 
 ```pas
 var
@@ -1092,7 +1183,7 @@ Dec
 December
 ```
 
-## 4.3. Short and long day names
+## 5.3. Short and long day names
 
 ```pas
 var
@@ -1125,7 +1216,7 @@ Sat
 Saturday
 ```
 
-## 4.4. Date and time calculations
+## 5.4. Date and time calculations
 
 ```pas
 DayOfTheMonth // Gives the day of month index for a TDateTime value
@@ -1139,9 +1230,9 @@ IsLeapYear    // Returns true if a given calendar year is a leap year
 MinsPerDay    // Gives the number of minutes in a day 
 ```
 
-## 4.5. Displaying date and time values
+## 5.5. Displaying date and time values
 
-### 4.5.1. Displaying date and time values
+### 5.5.1. Displaying date and time values
 
 ```pas
 var
@@ -1215,7 +1306,7 @@ dddd d of mmmm yyyy = Wednesday 9 of February 2000
                   c = 09/02/2000 05:06:07
 ```
 
-### 4.5.2. Formatting control variables
+### 5.5.2. Formatting control variables
 
 ```pas
 DateSeparator              = /
@@ -1233,9 +1324,9 @@ LongDayNames               = Sunday, Monday ...
 TwoDigitYearCenturyWindow  = 50 
 ```
 
-# 5. Files
+# 6. Files
 
-## 5.1. Accessing files
+## 6.1. Accessing files
 
 First, we must get a **handle** for a named file:
 
@@ -1261,7 +1352,7 @@ When we have finished, we must close the file:
 CloseFile(myFile);
 ```
 
-## 5.2. Reading and writing to text files
+## 6.2. Reading and writing to text files
 
 ```pas
 var
@@ -1369,7 +1460,7 @@ Hello World
 1.0  1.5  2.0
 ```
 
-### 5.2.1. Example code : Reading one character at a time from a text file line
+### 6.2.1. Example code : Reading one character at a time from a text file line
 
 ```pas
 var
@@ -1428,7 +1519,7 @@ o
 u
 ```
 
-## 5.3. Reading and writing to typed binary files
+## 6.3. Reading and writing to typed binary files
 
 Typed binary files are files that have a data type as the basic unit of writing and reading. You write, say, an Integer, or a Record to a file, and read the same unit of data back. Records are particularly useful, allowing us to store any mix of data types in the one file unit of data.
 
@@ -1490,7 +1581,7 @@ Man with name Fred Bloggs is 21
 Lady with name Jane Turner is 45
 ```
 
-## 5.4. Reading and writing to pure binary files
+## 6.4. Reading and writing to pure binary files
 
 ```pas
 var
@@ -1567,7 +1658,7 @@ Reading remaining bytes :
 16
 ```
 
-## 5.5. Other file processing mechanisms
+## 6.5. Other file processing mechanisms
 
 | name       | description                                      |
 | ---------- | ------------------------------------------------ |
@@ -1576,7 +1667,7 @@ Reading remaining bytes :
 | `SeekEof`  | Skip to the end of the current line or file      |
 | `SeekEoln` | Skip to the end of the current line or file      |
 
-## 5.6. Getting information about files and directories
+## 6.6. Getting information about files and directories
 
 | name              | description                                              |
 | ----------------- | -------------------------------------------------------- |
@@ -1598,7 +1689,7 @@ Reading remaining bytes :
 | `SetCurrentDir`   | Change the current directory                             |
 | `Truncate`        | Truncates a file size                                    |
 
-## 5.7. Using TStringList to read and write text files
+## 6.7. Using TStringList to read and write text files
 
 The `TStringList` class is a very useful utility class that works on a lits of strings, each indexable like an array. The list can be sorted, and supports name/value pair strings, allowing selection by name or value.
 
@@ -1648,9 +1739,9 @@ begin
 end;
 ```
 
-# 6. Conversions
+# 7. Conversions
 
-## 6.1. Integer to string
+## 7.1. Integer to string
 
 ```pas
 var
@@ -1667,7 +1758,7 @@ begin
 end;
 ```
 
-## 6.2. Float to string
+## 7.2. Float to string
 
 ```pas
 var
@@ -1683,7 +1774,7 @@ begin
 end;
 ```
 
-## 6.3. String to integer
+## 7.3. String to integer
 
 ```pas
 var
@@ -1728,7 +1819,16 @@ begin
 end;
 ```
 
-# 7. Format
+## 7.4. Tryparse string to integer
+
+```pas
+if not TryStrToInt(StrVal, IntVal) then
+begin
+// error handling
+end;
+```
+
+# 8. Format
 
 The Format function provides 'C' like formatting of multiple of simple data types into a string. It provides very precise control over this formatting.
  
@@ -1762,15 +1862,15 @@ Version 2 of this function is for use within threads. You furnish the FormatSett
 
 [more](http://www.delphibasics.co.uk/RTL.asp?Name=Format)
 
-# 8. UI elements
+# 9. UI elements
 
-## 8.1. Label
+## 9.1. Label
 
 ```pas
 Label1.Caption := 'szöveg'
 ```
 
-## 8.2. Dialog
+## 9.2. Dialog
 
 The `DialogType` may have one of the following enumerated values:
  
@@ -1833,7 +1933,7 @@ Note that the Help button has no equivalent return value. This is because it doe
  
 The HelpContext value is used in conjunction with the Help button. It's use is beyond the scope of Delphi Basics. 
 
-### 8.2.1. Confirmation dialog
+### 9.2.1. Confirmation dialog
 
 ```pas
 var
@@ -1848,7 +1948,7 @@ begin
 end;
 ```
 
-### 8.2.2. Custom dialog with custom button selection
+### 9.2.2. Custom dialog with custom button selection
 
 ```pas
 var
@@ -1865,15 +1965,15 @@ begin
 end;
 ```
 
-## Picture
+## 9.3. Picture
 
 ```pas
 PlayerCard1.Picture.LoadFromFile('C:\Users\w\Desktop\delphi\black_jack\images\AC.PNG');
 ```
 
-# 9. Good to know
+# 10. Good to know
 
-## 9.1. Generate random character
+## 10.1. Generate random character
 
 'A' to 'Z' = 65 - 90
 
@@ -1889,4 +1989,17 @@ uses Math
 ...
 
 chr(RandomRange(65, 90))
+```
+
+## 10.2. Textbox `Edit` when press enter
+
+```pas
+procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if ord(Key) = VK_RETURN then
+  begin
+    Key := #0; // prevent beeping
+    WebBrowser1.Navigate(Edit1.Text);
+  end;
+end; 
 ```
