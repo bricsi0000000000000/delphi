@@ -1,16 +1,18 @@
+// Bólya Richárd DAWOBY
+
 unit Unit1;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, math;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, math, Vcl.StdCtrls;
 
 type
   TForm1 = class(TForm)
     Image1: TImage;
-    procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -20,102 +22,303 @@ type
 var
   Form1: TForm1;
 
+
 type Pont = Record
-  x : extended;
-  y : extended;
+  x : integer;
+  y : integer;
 end;
+
+const LEPES_X = 5;
+const LEPES_Y = 10;
+
+const NAGYITAS = 10;
+
+const FORGATASI_SZOG = 30;
+
+const MIN_CSUCSOK_SZAMA = 3;
+const MAX_CSUCSOK_SZAMA = 8;
+
+type Iranyok = (fel, le, jobb, bal);
 
 type Sokszog = class(TObject)
   private
     probaRead : integer;
     csucsokSzama : integer;
     kozeppont : Pont;
-    csucsok : array[1..8] of Pont;
-    szin : string;
+    csucsok : array[1..MAX_CSUCSOK_SZAMA] of Pont;
+    szin : TColor;
     kezdoSzog : single;
     r : single;
-
-    procedure Szamit;
-    procedure probaWrite(i : integer);
-    property proba : integer read probaRead write probaWrite;
+    function Szamit(image : TImage) : boolean;
   public
-    constructor Create(x0, y0 : integer);
-    function Meret : integer;
+    constructor Create(x0, y0, tavolsag, cs : integer; szog : single; sz : TColor);
     procedure Megjelenit(image : TImage);
+    procedure Torol(image : TImage);
+    function Novel(image : TImage) : boolean;
+    procedure Csokkent;
+    procedure Mozgat(image : TImage; irany : Iranyok);
+    procedure Nagyit(image : TImage);
 end;
+
+var ujCsucsok : array[1..MAX_CSUCSOK_SZAMA] of Pont;
+
+var aSokSzog : Sokszog;
 
 implementation
 
 {$R *.dfm}
 
-procedure Sokszog.probaWrite(i : integer);
-begin
-
-end;
-
-constructor Sokszog.Create(x0, y0 : integer);
+constructor Sokszog.Create(x0, y0, tavolsag, cs : integer; szog : single; sz : TColor);
 var k : Pont;
 begin
-  with k do
+  if (cs < 3) or (cs > 8)then
   begin
-    x := x0;
-    y := y0;
+    ShowMessage('Nem megfelelõ a csúcsok száma');
+  end
+  else
+  begin
+    with k do
+    begin
+      x := x0;
+      y := y0;
+    end;
+    kozeppont := k;
+    r := tavolsag;
+    csucsokSzama:= cs;
+    kezdoSzog := szog;
+    szin := sz;
   end;
-  kozeppont := k;
 end;
 
-function Sokszog.Meret : integer;
+procedure Sokszog.Nagyit(image : TImage);
+var kilog : boolean;
+var regiR : single;
 begin
+  regiR := aSokSzog.r;
+  aSokSzog.r := aSokSzog.r + NAGYITAS;
+  kilog := Szamit(image);
+  if kilog = true then
+  begin
+    aSokSzog.r := regiR;
+  end;
+end;
 
+procedure Sokszog.Mozgat(image : TImage; irany : Iranyok);
+var ujKozeppont : Pont;
+var regiKozeppont : Pont;
+var kilog : boolean;
+var i : integer;
+begin
+  regiKozeppont := kozeppont;
+  case irany of
+    bal :
+    begin
+      with ujKozeppont do
+      begin
+        x := aSokSzog.kozeppont.x - LEPES_X;
+        y := aSokSzog.kozeppont.y;
+      end;
+    end;
+    fel :
+    begin
+      with ujKozeppont do
+      begin
+        x := aSokSzog.kozeppont.x;
+        y := aSokSzog.kozeppont.y - LEPES_Y;
+      end;
+    end;
+    jobb :
+    begin
+      with ujKozeppont do
+      begin
+        x := aSokSzog.kozeppont.x + LEPES_X;
+        y := aSokSzog.kozeppont.y;
+      end;
+    end;
+    le :
+    begin
+       with ujKozeppont do
+      begin
+        x := aSokSzog.kozeppont.x;
+        y := aSokSzog.kozeppont.y + LEPES_Y;
+      end;
+    end;
+  end;
+  kozeppont := ujKozeppont;
+  kilog := Szamit(image);
+
+  if kilog = true then
+  begin
+     kozeppont := regiKozeppont;
+  end;
+
+end;
+
+function Sokszog.Novel(image : TImage) : boolean;
+var kilog : boolean;
+var regiCsucsokSzama : integer;
+begin
+  regiCsucsokSzama := csucsokSzama;
+  if csucsokSzama + 1 <= MAX_CSUCSOK_SZAMA then
+  begin
+     Inc(csucsokSzama);
+  end;
+  kilog := Szamit(image);
+  if kilog = true then
+  begin
+    csucsokSzama := regiCsucsokSzama;
+  end;
+end;
+
+procedure Sokszog.Csokkent;
+begin
+  if csucsokSzama - 1 >= MIN_CSUCSOK_SZAMA then
+  begin
+     csucsokSzama := csucsokSzama - 1;
+  end;
 end;
 
 procedure Sokszog.Megjelenit(image : TImage);
+var i : integer;
+var kilog : boolean;
 begin
-  Szamit;
+  kilog := Szamit(image);
+  if kilog = false then
+  begin
+    for i := 1 to MAX_CSUCSOK_SZAMA do
+    begin
+      csucsok[i] := ujCsucsok[i];
+    end;
+  end;
 
   with image.Canvas do
   begin
 
+    Pen.Color := szin;
+    MoveTo(csucsok[1].x, csucsok[1].y);
+    for i := 2 to csucsokSzama do
+    begin
+      LineTo(csucsok[i].x, csucsok[i].y);
+    end;
+    LineTo(csucsok[1].x, csucsok[1].y);
   end;
 end;
 
-procedure Sokszog.Szamit;
+procedure Sokszog.Torol(image : TImage);
+var i : integer;
+begin
+  with image.Canvas do
+  begin
+    Pen.Color := clwhite;
+    MoveTo(csucsok[1].x, csucsok[1].y);
+    for i := 2 to csucsokSzama do
+    begin
+      LineTo(csucsok[i].x, csucsok[i].y);
+    end;
+    LineTo(csucsok[1].x, csucsok[1].y);
+  end;
+end;
+
+function Sokszog.Szamit(image : TImage) : boolean;
 var i : integer;
 var p : Pont;
 var szogRad : single;
+var szog : single;
+var szogEltolas : single;
+var kilog : boolean;
 begin
-  szogRad := kezdoSzog * 2 * (pi / 360);
-//  ShowMessage(szograd.ToString);
-  for i := 1 to csucsokSzama do
+  kilog := false;
+  if (csucsokSzama >= MIN_CSUCSOK_SZAMA) and (csucsokSzama <= MAX_CSUCSOK_SZAMA) then
   begin
-      with p do
-      begin
-        x := kozeppont.x + r * cos(szogRad);
-        y := kozeppont.y - r * sin(szogRad);
-      end;
-      csucsok[i] := p;
+    szog := kezdoSzog;
+    szogEltolas := 360 / csucsokSzama;
+
+    for i := 1 to csucsokSzama do
+    begin
+     if kilog = false then
+     begin
+        szogRad := szog * 2 * (pi / 360);
+        with p do
+        begin
+          x := Round(kozeppont.x + r * cos(szogRad));
+          y := Round(kozeppont.y - r * sin(szogRad));
+        end;
+
+        // ne menjen le a képernyõrõl
+        if (p.x >= 0) and (p.x <= image.Width) and (p.y >= 0) and (p.y <= image.Height) then
+        begin
+          ujCsucsok[i] := p;
+          szog := szog + szogEltolas;
+        end
+        else
+        begin
+          kilog := true;
+        end;
+     end;
+    end;
   end;
 
-  for i := 1 to csucsokSzama do
-  begin
-    ShowMessage(csucsok[i].x.ToString + ';' + csucsok[i].y.ToString);
-  end;
-
+  Result := kilog;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
-var s : Sokszog;
 begin
-  s := Sokszog.Create(3,6);
-  s.kezdoSzog := 30;
-  s.r := 35;
-  s.csucsokSzama := 5;
-  s.Megjelenit(Image1);
+  aSokSzog := Sokszog.Create(Floor(Form1.Width / 2),Floor(Form1.Height / 2), random(50) + 5, random(5) + 3, random(360), clblue);
+  aSokSzog.Megjelenit(Image1);
 end;
 
 procedure TForm1.FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+var ujKozeppont : Pont;
 begin
- // ShowMessage(Key.ToString);
+
+    ujKozeppont := aSokSzog.kozeppont;
+    aSokSzog.Torol(Image1);
+
+    if Key = 37 then //bal
+    begin
+       aSokSzog.Mozgat(Image1, bal);
+    end
+    else if Key = 38 then //fel
+    begin
+      aSokSzog.Mozgat(Image1, fel);
+    end
+    else if Key = 39 then //jobb
+    begin
+      aSokSzog.Mozgat(Image1, jobb);
+    end
+    else if Key =40 then //le
+    begin
+      aSokSzog.Mozgat(Image1, le);
+    end
+    else if Key = 33 then //nagyitas
+    begin
+      aSokSzog.Nagyit(Image1);
+    end
+    else if Key = 34 then //kicsinyites
+    begin
+      if aSokSzog.r - NAGYITAS > NAGYITAS then
+      begin
+        aSokSzog.r := aSokSzog.r - NAGYITAS;
+      end;
+    end
+    else if Key = 36 then //forgat jobbra
+    begin
+      aSokSzog.kezdoSzog := aSokSzog.kezdoSzog + FORGATASI_SZOG;
+    end
+    else if Key = 35 then //forgat balra
+    begin
+      aSokSzog.kezdoSzog := aSokSzog.kezdoSzog - FORGATASI_SZOG;
+    end
+    else if Key = 45 then //novel
+    begin
+      aSokSzog.Novel(Image1);
+    end
+    else if Key = 46 then //csokkent
+    begin
+      aSokSzog.Csokkent;
+    end;
+
+    aSokSzog.Megjelenit(Image1);
 end;
 
 end.
