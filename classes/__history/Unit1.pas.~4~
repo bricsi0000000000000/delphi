@@ -1,0 +1,45 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type TFruit = Class(TObject)
+  private
+    isRound  : Boolean;
+    length   : single;
+    width    : single;
+    diameter : single;
+  protected
+  public
+    constructor Create(diameter : single); overload;
+    constructor Create(length : single; width : single); overload;
+  published
+    property round : Boolean
+      read   isRound;
+    property len   : single
+      read   length;
+    property wide  : single
+      read   width;
+    property diam  : single
+      read   diameter;
+end;
+
+type
+  TForm1 = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

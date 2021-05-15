@@ -67,24 +67,28 @@
   - [7.3. String to integer](#73-string-to-integer)
   - [7.4. Tryparse string to integer](#74-tryparse-string-to-integer)
 - [8. Format](#8-format)
-- [9. UI elements](#9-ui-elements)
-  - [9.1. Label](#91-label)
-  - [9.2. Dialog](#92-dialog)
-    - [9.2.1. Confirmation dialog](#921-confirmation-dialog)
-    - [9.2.2. Custom dialog with custom button selection](#922-custom-dialog-with-custom-button-selection)
-  - [9.3. Picture](#93-picture)
-  - [9.4. Timer](#94-timer)
-  - [9.5. Toolbar](#95-toolbar)
-  - [9.6. Form](#96-form)
-    - [9.6.1. Create another form](#961-create-another-form)
-  - [9.7. ListBox](#97-listbox)
-  - [9.8. Drag and drop](#98-drag-and-drop)
-    - [9.8.1. ListBox](#981-listbox)
-  - [9.9. StringGrid](#99-stringgrid)
-- [10. Good to know](#10-good-to-know)
-  - [10.1. Generate random character](#101-generate-random-character)
-  - [10.2. Textbox `Edit` when press enter](#102-textbox-edit-when-press-enter)
-- [11. Errors](#11-errors)
+- [9. Class](#9-class)
+- [10. UI elements](#10-ui-elements)
+  - [10.1. Label](#101-label)
+  - [10.2. Dialog](#102-dialog)
+    - [10.2.1. Confirmation dialog](#1021-confirmation-dialog)
+    - [10.2.2. Custom dialog with custom button selection](#1022-custom-dialog-with-custom-button-selection)
+  - [10.3. Picture](#103-picture)
+  - [10.4. Timer](#104-timer)
+  - [10.5. Toolbar](#105-toolbar)
+  - [10.6. Form](#106-form)
+    - [10.6.1. Create another form](#1061-create-another-form)
+  - [10.7. ListBox](#107-listbox)
+  - [10.8. Drag and drop](#108-drag-and-drop)
+    - [10.8.1. ListBox](#1081-listbox)
+  - [10.9. StringGrid](#109-stringgrid)
+  - [Canvas](#canvas)
+    - [Draw line](#draw-line)
+    - [Draw ellipse](#draw-ellipse)
+- [11. Good to know](#11-good-to-know)
+  - [11.1. Generate random character](#111-generate-random-character)
+  - [11.2. Textbox `Edit` when press enter](#112-textbox-edit-when-press-enter)
+- [12. Errors](#12-errors)
 
 # 1. Data types
 
@@ -413,6 +417,18 @@ end;
 customer.firstName is now set to 'Fred'
 customer.lastName  is now set to 'Bloggs'
 customer.age       is now set to 55
+```
+
+Or
+
+```pas
+var c : Card;
+
+with c do
+begin
+  cType := i;
+  cNumber := j;
+end;
 ```
 
 # 2. Operators
@@ -1932,15 +1948,92 @@ Version 2 of this function is for use within threads. You furnish the FormatSett
 
 [more](http://www.delphibasics.co.uk/RTL.asp?Name=Format)
 
-# 9. UI elements
+# 9. Class
 
-## 9.1. Label
+```pas
+type
+  className = class(BaseClass)
+  private
+    // Data/method defs local to this Unit
+  protected
+    // Data/method defs local to this class + descendants
+  public
+    // Data/method defs usable with all objects of this class
+  published
+    // Externally interrogatable public definitions
+end;
+```
+
+Fruit class:
+
+```pas
+TFruit = Class(TObject)  // This is an actual class definition :
+    // Internal class field definitions - only accessible in this unit
+    private
+      isRound  : Boolean;
+      length   : single;
+      width    : single;
+      diameter : single;
+    // Fields and methods only accessible by this class and descendants
+    protected
+    // Externally accessible fields and methods
+    public
+      // 2 constructors - one for round fruit, the other long fruit
+      constructor Create(diameter : single);               overload;
+      constructor Create(length : single; width : single); overload;
+    // Externally accessible and inspectable fields and methods
+    published
+      // Note that properties must use different names to local defs
+      property round : Boolean
+        read   isRound;
+      property len   : single
+        read   length;
+      property wide  : single
+        read   width;
+      property diam  : single
+        read   diameter;
+  end;                    // End of the TFruit class definition
+```
+
+Create constructors:
+
+```pas
+// Create a round fruit object
+constructor TFruit.Create(diameter: single);
+begin
+  // Indicate that we have a round fruit, and set its size
+  isRound       := true;
+  self.diameter := diameter;
+end;
+
+// Create a long fruit object
+constructor TFruit.Create(length, width: single);
+begin
+  // Indicate that we have a long fruit, and set its size
+  isRound     := false;
+  self.length := length;
+  self.width  := width;
+end;
+```
+
+Create instance of `TFruit`:
+
+```pas
+var apple, banana : TFruit;
+
+apple  := TFruit.Create(3.5);
+banana := TFruit.Create(7.0, 1.75);
+```
+
+# 10. UI elements
+
+## 10.1. Label
 
 ```pas
 Label1.Caption := 'szöveg'
 ```
 
-## 9.2. Dialog
+## 10.2. Dialog
 
 The `DialogType` may have one of the following enumerated values:
  
@@ -2003,7 +2096,7 @@ Note that the Help button has no equivalent return value. This is because it doe
  
 The HelpContext value is used in conjunction with the Help button. It's use is beyond the scope of Delphi Basics. 
 
-### 9.2.1. Confirmation dialog
+### 10.2.1. Confirmation dialog
 
 ```pas
 var
@@ -2018,7 +2111,7 @@ begin
 end;
 ```
 
-### 9.2.2. Custom dialog with custom button selection
+### 10.2.2. Custom dialog with custom button selection
 
 ```pas
 var
@@ -2035,21 +2128,28 @@ begin
 end;
 ```
 
-## 9.3. Picture
+## 10.3. Picture
 
 ```pas
 PlayerCard1.Picture.LoadFromFile('C:\Users\w\Desktop\delphi\black_jack\images\AC.PNG');
 ```
 
-## 9.4. Timer
+## 10.4. Timer
 
-## 9.5. Toolbar
+```pas
+Ora := TTimer.Create(Self);
+Ora.Interval := 100; // 100 ms
+Ora.OnTimer := LetsGo; // call procedure in every 100 ms
+Ora.Enabled := false; // don't start
+```
 
-## 9.6. Form
+## 10.5. Toolbar
+
+## 10.6. Form
 
 `OnCreate`
 
-### 9.6.1. Create another form
+### 10.6.1. Create another form
 
 Other form:
 
@@ -2117,7 +2217,7 @@ begin
 end;
 ```
 
-## 9.7. ListBox
+## 10.7. ListBox
 
 Add item: `ListBox1.Items.Add(string)`
 
@@ -2137,9 +2237,9 @@ end;
 
 `Multiselect := true` / `false`
 
-## 9.8. Drag and drop
+## 10.8. Drag and drop
 
-### 9.8.1. ListBox
+### 10.8.1. ListBox
 
 There is 2 listboxes
 
@@ -2208,7 +2308,7 @@ begin
 end;
 ```
 
-## 9.9. StringGrid
+## 10.9. StringGrid
 
 ```pas
 StringGrid1.Cells[columnIndex, rowIndex] := 'yo';
@@ -2217,10 +2317,33 @@ StringGrid1.Cells[columnIndex, rowIndex] := 'yo';
 // you will need -1, because of the indexing
 StringGrid1.Cells[StringGrid1.ColCount - 1, StringGrid1.RowCount - 1] := 'ez';
 ```
+## Canvas
 
-# 10. Good to know
+### Draw line
 
-## 10.1. Generate random character
+Draw line on Image1
+
+```pas
+with Image1.Canvas do
+begin
+  Brush.Style := bsClear;
+  Pen.Style := psSolid;
+  Pen.Color := clGreen;
+  Pen.Width := 50;
+  MoveTo(19,79);
+  LineTo(40,35);
+end;
+```
+
+### Draw ellipse
+
+```pas
+Ellipse(20,200,50,70);
+```
+
+# 11. Good to know
+
+## 11.1. Generate random character
 
 'A' to 'Z' = 65 - 90
 
@@ -2238,7 +2361,7 @@ uses Math
 chr(RandomRange(65, 90))
 ```
 
-## 10.2. Textbox `Edit` when press enter
+## 11.2. Textbox `Edit` when press enter
 
 ```pas
 procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
@@ -2251,6 +2374,6 @@ begin
 end; 
 ```
 
-# 11. Errors
+# 12. Errors
 
 If delphi can't create exe and it isn't opened, find it int Task Manager and kill it.

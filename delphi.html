@@ -139,39 +139,46 @@
 </ul>
 </li>
 <li><a href="#8-format">8. Format</a></li>
-<li><a href="#9-ui-elements">9. UI elements</a>
+<li><a href="#9-class">9. Class</a></li>
+<li><a href="#10-ui-elements">10. UI elements</a>
 <ul>
-<li><a href="#91-label">9.1. Label</a></li>
-<li><a href="#92-dialog">9.2. Dialog</a>
+<li><a href="#101-label">10.1. Label</a></li>
+<li><a href="#102-dialog">10.2. Dialog</a>
 <ul>
-<li><a href="#921-confirmation-dialog">9.2.1. Confirmation dialog</a></li>
-<li><a href="#922-custom-dialog-with-custom-button-selection">9.2.2. Custom dialog with custom button selection</a></li>
+<li><a href="#1021-confirmation-dialog">10.2.1. Confirmation dialog</a></li>
+<li><a href="#1022-custom-dialog-with-custom-button-selection">10.2.2. Custom dialog with custom button selection</a></li>
 </ul>
 </li>
-<li><a href="#93-picture">9.3. Picture</a></li>
-<li><a href="#94-timer">9.4. Timer</a></li>
-<li><a href="#95-toolbar">9.5. Toolbar</a></li>
-<li><a href="#96-form">9.6. Form</a>
+<li><a href="#103-picture">10.3. Picture</a></li>
+<li><a href="#104-timer">10.4. Timer</a></li>
+<li><a href="#105-toolbar">10.5. Toolbar</a></li>
+<li><a href="#106-form">10.6. Form</a>
 <ul>
-<li><a href="#961-create-another-form">9.6.1. Create another form</a></li>
+<li><a href="#1061-create-another-form">10.6.1. Create another form</a></li>
 </ul>
 </li>
-<li><a href="#97-listbox">9.7. ListBox</a></li>
-<li><a href="#98-drag-and-drop">9.8. Drag and drop</a>
+<li><a href="#107-listbox">10.7. ListBox</a></li>
+<li><a href="#108-drag-and-drop">10.8. Drag and drop</a>
 <ul>
-<li><a href="#981-listbox">9.8.1. ListBox</a></li>
+<li><a href="#1081-listbox">10.8.1. ListBox</a></li>
 </ul>
 </li>
-<li><a href="#99-stringgrid">9.9. StringGrid</a></li>
-</ul>
-</li>
-<li><a href="#10-good-to-know">10. Good to know</a>
+<li><a href="#109-stringgrid">10.9. StringGrid</a></li>
+<li><a href="#canvas">Canvas</a>
 <ul>
-<li><a href="#101-generate-random-character">10.1. Generate random character</a></li>
-<li><a href="#102-textbox-edit-when-press-enter">10.2. Textbox <code>Edit</code> when press enter</a></li>
+<li><a href="#draw-line">Draw line</a></li>
+<li><a href="#draw-ellipse">Draw ellipse</a></li>
 </ul>
 </li>
-<li><a href="#11-errors">11. Errors</a></li>
+</ul>
+</li>
+<li><a href="#11-good-to-know">11. Good to know</a>
+<ul>
+<li><a href="#111-generate-random-character">11.1. Generate random character</a></li>
+<li><a href="#112-textbox-edit-when-press-enter">11.2. Textbox <code>Edit</code> when press enter</a></li>
+</ul>
+</li>
+<li><a href="#12-errors">12. Errors</a></li>
 </ul>
 <h1 id="1-data-types">1. Data types</h1>
 <h2 id="11-integers">1.1. Integers</h2>
@@ -462,6 +469,15 @@ nums1 is not a superset of nums3
 customer.lastName  is now set to 'Bloggs'
 customer.age       is now set to 55
 </div></code></code></pre>
+<p>Or</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span> c : Card;
+
+<span class="hljs-keyword">with</span> c <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">begin</span>
+  cType := i;
+  cNumber := j;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
 <h1 id="2-operators">2. Operators</h1>
 <h2 id="21-binary-arithmetic-operators">2.1. Binary Arithmetic Operators</h2>
 <table>
@@ -2164,11 +2180,76 @@ Ext   = .dcu
 <p>where the square brackets refer to optional parameters, and the : . - characters are literals, the first 2 of which are used to identify two of the optional arguments.</p>
 <p>Version 2 of this function is for use within threads. You furnish the FormatSettings record before invoking the call. It takes a local copy of global formatting variables that make the routine thread safe.</p>
 <p><a href="http://www.delphibasics.co.uk/RTL.asp?Name=Format">more</a></p>
-<h1 id="9-ui-elements">9. UI elements</h1>
-<h2 id="91-label">9.1. Label</h2>
+<h1 id="9-class">9. Class</h1>
+<pre><code class="language-pas"><div><span class="hljs-keyword">type</span>
+  <span class="hljs-title">className</span> = <span class="hljs-keyword">class</span>(BaseClass)
+  <span class="hljs-keyword">private</span>
+    <span class="hljs-comment">// Data/method defs local to this Unit</span>
+  <span class="hljs-keyword">protected</span>
+    <span class="hljs-comment">// Data/method defs local to this class + descendants</span>
+  <span class="hljs-keyword">public</span>
+    <span class="hljs-comment">// Data/method defs usable with all objects of this class</span>
+  <span class="hljs-keyword">published</span>
+    <span class="hljs-comment">// Externally interrogatable public definitions</span>
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>Fruit class:</p>
+<pre><code class="language-pas"><div><span class="hljs-title">TFruit</span> = <span class="hljs-keyword">Class</span>(TObject)  <span class="hljs-comment">// This is an actual class definition :</span>
+    <span class="hljs-comment">// Internal class field definitions - only accessible in this unit</span>
+    <span class="hljs-keyword">private</span>
+      isRound  : Boolean;
+      length   : single;
+      width    : single;
+      diameter : single;
+    <span class="hljs-comment">// Fields and methods only accessible by this class and descendants</span>
+    <span class="hljs-keyword">protected</span>
+    <span class="hljs-comment">// Externally accessible fields and methods</span>
+    <span class="hljs-keyword">public</span>
+      <span class="hljs-comment">// 2 constructors - one for round fruit, the other long fruit</span>
+      <span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">Create</span><span class="hljs-params">(diameter : single)</span>;</span>               <span class="hljs-keyword">overload</span>;
+      <span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">Create</span><span class="hljs-params">(length : single; width : single)</span>;</span> <span class="hljs-keyword">overload</span>;
+    <span class="hljs-comment">// Externally accessible and inspectable fields and methods</span>
+    <span class="hljs-keyword">published</span>
+      <span class="hljs-comment">// Note that properties must use different names to local defs</span>
+      <span class="hljs-keyword">property</span> round : Boolean
+        <span class="hljs-keyword">read</span>   isRound;
+      <span class="hljs-keyword">property</span> len   : single
+        <span class="hljs-keyword">read</span>   length;
+      <span class="hljs-keyword">property</span> wide  : single
+        <span class="hljs-keyword">read</span>   width;
+      <span class="hljs-keyword">property</span> diam  : single
+        <span class="hljs-keyword">read</span>   diameter;
+  <span class="hljs-keyword">end</span>;                    <span class="hljs-comment">// End of the TFruit class definition</span>
+</div></code></pre>
+<p>Create constructors:</p>
+<pre><code class="language-pas"><div><span class="hljs-comment">// Create a round fruit object</span>
+<span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">TFruit</span>.<span class="hljs-title">Create</span><span class="hljs-params">(diameter: single)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Indicate that we have a round fruit, and set its size</span>
+  isRound       := true;
+  self.diameter := diameter;
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-comment">// Create a long fruit object</span>
+<span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">TFruit</span>.<span class="hljs-title">Create</span><span class="hljs-params">(length, width: single)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Indicate that we have a long fruit, and set its size</span>
+  isRound     := false;
+  self.length := length;
+  self.width  := width;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>Create instance of <code>TFruit</code>:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span> apple, banana : TFruit;
+
+apple  := TFruit.Create(<span class="hljs-number">3.5</span>);
+banana := TFruit.Create(<span class="hljs-number">7.0</span>, <span class="hljs-number">1.75</span>);
+</div></code></pre>
+<h1 id="10-ui-elements">10. UI elements</h1>
+<h2 id="101-label">10.1. Label</h2>
 <pre><code class="language-pas"><div>Label1.Caption := <span class="hljs-string">&#x27;szöveg&#x27;</span>
 </div></code></pre>
-<h2 id="92-dialog">9.2. Dialog</h2>
+<h2 id="102-dialog">10.2. Dialog</h2>
 <p>The <code>DialogType</code> may have one of the following enumerated values:</p>
 <table>
 <thead>
@@ -2342,7 +2423,7 @@ Ext   = .dcu
 <p>Additionally, these values are defined in the Controls unit, not the Dialogs unit.</p>
 <p>Note that the Help button has no equivalent return value. This is because it does not terminate the dialog.</p>
 <p>The HelpContext value is used in conjunction with the Help button. It's use is beyond the scope of Delphi Basics.</p>
-<h3 id="921-confirmation-dialog">9.2.1. Confirmation dialog</h3>
+<h3 id="1021-confirmation-dialog">10.2.1. Confirmation dialog</h3>
 <pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
   buttonSelected : Integer;
 <span class="hljs-keyword">begin</span>
@@ -2354,7 +2435,7 @@ Ext   = .dcu
   <span class="hljs-keyword">if</span> buttonSelected = mrCancel <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;Cancel pressed&#x27;</span>);
 <span class="hljs-keyword">end</span>;
 </div></code></pre>
-<h3 id="922-custom-dialog-with-custom-button-selection">9.2.2. Custom dialog with custom button selection</h3>
+<h3 id="1022-custom-dialog-with-custom-button-selection">10.2.2. Custom dialog with custom button selection</h3>
 <pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
   buttonSelected : Integer;
 <span class="hljs-keyword">begin</span>
@@ -2368,14 +2449,19 @@ Ext   = .dcu
   <span class="hljs-keyword">if</span> buttonSelected = mrCancel <span class="hljs-keyword">then</span> ShowMessage(<span class="hljs-string">&#x27;Cancel pressed&#x27;</span>);
 <span class="hljs-keyword">end</span>;
 </div></code></pre>
-<h2 id="93-picture">9.3. Picture</h2>
+<h2 id="103-picture">10.3. Picture</h2>
 <pre><code class="language-pas"><div>PlayerCard1.Picture.LoadFromFile(<span class="hljs-string">&#x27;C:\Users\w\Desktop\delphi\black_jack\images\AC.PNG&#x27;</span>);
 </div></code></pre>
-<h2 id="94-timer">9.4. Timer</h2>
-<h2 id="95-toolbar">9.5. Toolbar</h2>
-<h2 id="96-form">9.6. Form</h2>
+<h2 id="104-timer">10.4. Timer</h2>
+<pre><code class="language-pas"><div>Ora := TTimer.Create(Self);
+Ora.Interval := <span class="hljs-number">100</span>; <span class="hljs-comment">// 100 ms</span>
+Ora.OnTimer := LetsGo; <span class="hljs-comment">// call procedure in every 100 ms</span>
+Ora.Enabled := false; <span class="hljs-comment">// don&#x27;t start</span>
+</div></code></pre>
+<h2 id="105-toolbar">10.5. Toolbar</h2>
+<h2 id="106-form">10.6. Form</h2>
 <p><code>OnCreate</code></p>
-<h3 id="961-create-another-form">9.6.1. Create another form</h3>
+<h3 id="1061-create-another-form">10.6.1. Create another form</h3>
 <p>Other form:</p>
 <pre><code class="language-pas"><div><span class="hljs-keyword">unit</span> Unit2;
 
@@ -2436,7 +2522,7 @@ Ext   = .dcu
   otherForm.free;
 <span class="hljs-keyword">end</span>;
 </div></code></pre>
-<h2 id="97-listbox">9.7. ListBox</h2>
+<h2 id="107-listbox">10.7. ListBox</h2>
 <p>Add item: <code>ListBox1.Items.Add(string)</code></p>
 <p>Delete item: <code>ListBox1.Items.Delete(index)</code></p>
 <p>Get selected:</p>
@@ -2449,8 +2535,8 @@ Ext   = .dcu
 <span class="hljs-keyword">end</span>;
 </div></code></pre>
 <p><code>Multiselect := true</code> / <code>false</code></p>
-<h2 id="98-drag-and-drop">9.8. Drag and drop</h2>
-<h3 id="981-listbox">9.8.1. ListBox</h3>
+<h2 id="108-drag-and-drop">10.8. Drag and drop</h2>
+<h3 id="1081-listbox">10.8.1. ListBox</h3>
 <p>There is 2 listboxes</p>
 <p>Drag items from listbox1 to listbox2</p>
 <p>Add items to listbox1</p>
@@ -2500,15 +2586,31 @@ Ext   = .dcu
   Accept := true;
 <span class="hljs-keyword">end</span>;
 </div></code></pre>
-<h2 id="99-stringgrid">9.9. StringGrid</h2>
+<h2 id="109-stringgrid">10.9. StringGrid</h2>
 <pre><code class="language-pas"><div>StringGrid1.Cells[columnIndex, rowIndex] := <span class="hljs-string">&#x27;yo&#x27;</span>;
 
 <span class="hljs-comment">// last row last cell</span>
 <span class="hljs-comment">// you will need -1, because of the indexing</span>
 StringGrid1.Cells[StringGrid1.ColCount - <span class="hljs-number">1</span>, StringGrid1.RowCount - <span class="hljs-number">1</span>] := <span class="hljs-string">&#x27;ez&#x27;</span>;
 </div></code></pre>
-<h1 id="10-good-to-know">10. Good to know</h1>
-<h2 id="101-generate-random-character">10.1. Generate random character</h2>
+<h2 id="canvas">Canvas</h2>
+<h3 id="draw-line">Draw line</h3>
+<p>Draw line on Image1</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">with</span> Image1.Canvas <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">begin</span>
+  Brush.Style := bsClear;
+  Pen.Style := psSolid;
+  Pen.Color := clGreen;
+  Pen.Width := <span class="hljs-number">50</span>;
+  MoveTo(<span class="hljs-number">19</span>,<span class="hljs-number">79</span>);
+  LineTo(<span class="hljs-number">40</span>,<span class="hljs-number">35</span>);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<h3 id="draw-ellipse">Draw ellipse</h3>
+<pre><code class="language-pas"><div>Ellipse(<span class="hljs-number">20</span>,<span class="hljs-number">200</span>,<span class="hljs-number">50</span>,<span class="hljs-number">70</span>);
+</div></code></pre>
+<h1 id="11-good-to-know">11. Good to know</h1>
+<h2 id="111-generate-random-character">11.1. Generate random character</h2>
 <p>'A' to 'Z' = 65 - 90</p>
 <pre><code class="language-pas"><div>chr(random(<span class="hljs-number">25</span>) + <span class="hljs-number">65</span>)
 </div></code></pre>
@@ -2519,7 +2621,7 @@ StringGrid1.Cells[StringGrid1.ColCount - <span class="hljs-number">1</span>, Str
 
 chr(RandomRange(<span class="hljs-number">65</span>, <span class="hljs-number">90</span>))
 </div></code></pre>
-<h2 id="102-textbox-edit-when-press-enter">10.2. Textbox <code>Edit</code> when press enter</h2>
+<h2 id="112-textbox-edit-when-press-enter">11.2. Textbox <code>Edit</code> when press enter</h2>
 <pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">Edit1KeyPress</span><span class="hljs-params">(Sender: TObject; <span class="hljs-keyword">var</span> Key: Char)</span>;</span>
 <span class="hljs-keyword">begin</span>
   <span class="hljs-keyword">if</span> ord(Key) = VK_RETURN <span class="hljs-keyword">then</span>
@@ -2529,7 +2631,7 @@ chr(RandomRange(<span class="hljs-number">65</span>, <span class="hljs-number">9
   <span class="hljs-keyword">end</span>;
 <span class="hljs-keyword">end</span>; 
 </div></code></pre>
-<h1 id="11-errors">11. Errors</h1>
+<h1 id="12-errors">12. Errors</h1>
 <p>If delphi can't create exe and it isn't opened, find it int Task Manager and kill it.</p>
 
     </body>

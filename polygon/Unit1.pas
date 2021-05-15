@@ -1,0 +1,121 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, math;
+
+type
+  TForm1 = class(TForm)
+    Image1: TImage;
+    procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+type Pont = Record
+  x : extended;
+  y : extended;
+end;
+
+type Sokszog = class(TObject)
+  private
+    probaRead : integer;
+    csucsokSzama : integer;
+    kozeppont : Pont;
+    csucsok : array[1..8] of Pont;
+    szin : string;
+    kezdoSzog : single;
+    r : single;
+
+    procedure Szamit;
+    procedure probaWrite(i : integer);
+    property proba : integer read probaRead write probaWrite;
+  public
+    constructor Create(x0, y0 : integer);
+    function Meret : integer;
+    procedure Megjelenit(image : TImage);
+end;
+
+implementation
+
+{$R *.dfm}
+
+procedure Sokszog.probaWrite(i : integer);
+begin
+
+end;
+
+constructor Sokszog.Create(x0, y0 : integer);
+var k : Pont;
+begin
+  with k do
+  begin
+    x := x0;
+    y := y0;
+  end;
+  kozeppont := k;
+end;
+
+function Sokszog.Meret : integer;
+begin
+
+end;
+
+procedure Sokszog.Megjelenit(image : TImage);
+begin
+  Szamit;
+
+  with image.Canvas do
+  begin
+
+  end;
+end;
+
+procedure Sokszog.Szamit;
+var i : integer;
+var p : Pont;
+var szogRad : single;
+begin
+  szogRad := kezdoSzog * 2 * (pi / 360);
+//  ShowMessage(szograd.ToString);
+  for i := 1 to csucsokSzama do
+  begin
+      with p do
+      begin
+        x := kozeppont.x + r * cos(szogRad);
+        y := kozeppont.y - r * sin(szogRad);
+      end;
+      csucsok[i] := p;
+  end;
+
+  for i := 1 to csucsokSzama do
+  begin
+    ShowMessage(csucsok[i].x.ToString + ';' + csucsok[i].y.ToString);
+  end;
+
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+var s : Sokszog;
+begin
+  s := Sokszog.Create(3,6);
+  s.kezdoSzog := 30;
+  s.r := 35;
+  s.csucsokSzama := 5;
+  s.Megjelenit(Image1);
+end;
+
+procedure TForm1.FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+ // ShowMessage(Key.ToString);
+end;
+
+end.
