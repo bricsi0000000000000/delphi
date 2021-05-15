@@ -126,6 +126,8 @@
 <li><a href="#65-other-file-processing-mechanisms">6.5. Other file processing mechanisms</a></li>
 <li><a href="#66-getting-information-about-files-and-directories">6.6. Getting information about files and directories</a></li>
 <li><a href="#67-using-tstringlist-to-read-and-write-text-files">6.7. Using TStringList to read and write text files</a></li>
+<li><a href="#68-extract-file-path">6.8. Extract file path</a></li>
+<li><a href="#69-paramstr">6.9. ParamStr</a></li>
 </ul>
 </li>
 <li><a href="#7-conversions">7. Conversions</a>
@@ -147,14 +149,29 @@
 </ul>
 </li>
 <li><a href="#93-picture">9.3. Picture</a></li>
+<li><a href="#94-timer">9.4. Timer</a></li>
+<li><a href="#95-toolbar">9.5. Toolbar</a></li>
+<li><a href="#96-form">9.6. Form</a>
+<ul>
+<li><a href="#961-create-another-form">9.6.1. Create another form</a></li>
+</ul>
+</li>
+<li><a href="#97-listbox">9.7. ListBox</a></li>
+<li><a href="#98-drag-and-drop">9.8. Drag and drop</a>
+<ul>
+<li><a href="#981-listbox">9.8.1. ListBox</a></li>
+</ul>
+</li>
+<li><a href="#99-stringgrid">9.9. StringGrid</a></li>
 </ul>
 </li>
 <li><a href="#10-good-to-know">10. Good to know</a>
 <ul>
 <li><a href="#101-generate-random-character">10.1. Generate random character</a></li>
-<li><a href="#textbox-edit-when-press-enter">Textbox <code>Edit</code> when press enter</a></li>
+<li><a href="#102-textbox-edit-when-press-enter">10.2. Textbox <code>Edit</code> when press enter</a></li>
 </ul>
 </li>
+<li><a href="#11-errors">11. Errors</a></li>
 </ul>
 <h1 id="1-data-types">1. Data types</h1>
 <h2 id="11-integers">1.1. Integers</h2>
@@ -1969,6 +1986,50 @@ Reading remaining bytes :
   fileData.SaveToFile(<span class="hljs-string">&#x27;Test.txt&#x27;</span>);       <span class="hljs-comment">// Save the reverse sequence file</span>
 <span class="hljs-keyword">end</span>;
 </div></code></pre>
+<h2 id="68-extract-file-path">6.8. Extract file path</h2>
+<p>The <code>ExtractFilePath</code> function extracts from <code>FullFileName</code> the path substring.</p>
+<p>This is the part of the full file name up to and including the final <code>\</code> before the file name.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  fullFileName : <span class="hljs-keyword">string</span>;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Set up a full file name with drive and path</span>
+  fullFileName := <span class="hljs-string">&#x27;C:\Program Files\Borland\Delphi7\Projects\Unit1.dcu&#x27;</span>;
+
+  <span class="hljs-comment">// Show the component parts of this full name</span>
+  ShowMessage(<span class="hljs-string">&#x27;Drive = &#x27;</span>+ExtractFileDrive (fullFileName));
+  ShowMessage(<span class="hljs-string">&#x27;Dir   = &#x27;</span>+ExtractFileDir   (fullFileName));
+  ShowMessage(<span class="hljs-string">&#x27;Path  = &#x27;</span>+ExtractFilePath  (fullFileName));
+  ShowMessage(<span class="hljs-string">&#x27;Name  = &#x27;</span>+ExtractFileName  (fullFileName));
+  ShowMessage(<span class="hljs-string">&#x27;Ext   = &#x27;</span>+ExtractFileExt   (fullFileName));
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code><code><div>Drive = C:
+Dir   = C:\Program Files\Borland\Delphi7\Projects
+Path  = C:\Program Files\Borland\Delphi7\Projects\
+Name  = Unit1.dcu
+Ext   = .dcu
+</div></code></code></pre>
+<h2 id="69-paramstr">6.9. ParamStr</h2>
+<p>The <code>ParamStr</code> function returns one of the parameters from the command line used to invoke the current program.</p>
+<p>The <code>ParamIndex</code> parameter determines which parameter is returned:</p>
+<p><code>0</code> : The execution drive/path/program 1 : Return the 1st parameter 2 : Return the 2nd parameter ...</p>
+<p>If there is no parameter value for the given index,an empty string is returned.</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
+  cmd : <span class="hljs-keyword">string</span>;
+  i : Integer;
+
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// Before running this code, use the Run/parameters menu option</span>
+  <span class="hljs-comment">// to set the following command line parameters : -parm1 -parm2</span>
+
+  <span class="hljs-comment">// Show these parameters - note that the 0th parameter is the</span>
+  <span class="hljs-comment">// execution command on Windows</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> ParamCount <span class="hljs-keyword">do</span>
+    ShowMessage(<span class="hljs-string">&#x27;Parameter &#x27;</span>+IntToStr(i)+<span class="hljs-string">&#x27; = &#x27;</span>+ParamStr(i));
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
 <h1 id="7-conversions">7. Conversions</h1>
 <h2 id="71-integer-to-string">7.1. Integer to string</h2>
 <pre><code class="language-pas"><div><span class="hljs-keyword">var</span>
@@ -2310,6 +2371,142 @@ Reading remaining bytes :
 <h2 id="93-picture">9.3. Picture</h2>
 <pre><code class="language-pas"><div>PlayerCard1.Picture.LoadFromFile(<span class="hljs-string">&#x27;C:\Users\w\Desktop\delphi\black_jack\images\AC.PNG&#x27;</span>);
 </div></code></pre>
+<h2 id="94-timer">9.4. Timer</h2>
+<h2 id="95-toolbar">9.5. Toolbar</h2>
+<h2 id="96-form">9.6. Form</h2>
+<p><code>OnCreate</code></p>
+<h3 id="961-create-another-form">9.6.1. Create another form</h3>
+<p>Other form:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">unit</span> Unit2;
+
+<span class="hljs-keyword">interface</span>
+
+<span class="hljs-keyword">uses</span>
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+<span class="hljs-keyword">type</span>
+  <span class="hljs-title">TForm2</span> = <span class="hljs-keyword">class</span>(TForm)
+    ListBox1: TListBox;
+  <span class="hljs-keyword">private</span>
+    <span class="hljs-comment">{ Private declarations }</span>
+  <span class="hljs-keyword">public</span>
+    <span class="hljs-comment">{ Public declarations }</span>
+    <span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">Create</span><span class="hljs-params">(AOwner:Tcomponent;Valasztek:TStrings)</span>;</span>
+  <span class="hljs-keyword">end</span>;
+
+<span class="hljs-keyword">var</span>
+  Form2: TForm2;
+
+<span class="hljs-keyword">implementation</span>
+
+<span class="hljs-meta">{$R *.dfm}</span>
+
+<span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">TForm2</span>.<span class="hljs-title">Create</span><span class="hljs-params">(AOwner: TComponent; Valasztek:TStrings)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">inherited</span> Create(Owner);
+  Listbox1.items.Assign(valasztek);
+<span class="hljs-keyword">end</span>;
+
+<span class="hljs-keyword">end</span>.
+</div></code></pre>
+<p>Create the other form</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">uses</span> .. , Unit2;
+
+...
+
+<span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">Button1Click</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">var</span> otherForm : TForm2;
+<span class="hljs-keyword">var</span> items : TStringList;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-comment">// create a list and put items in it</span>
+  items := TStringList.Create;
+  items.Add(<span class="hljs-string">&#x27;elso&#x27;</span>);
+  items.Add(<span class="hljs-string">&#x27;masodik&#x27;</span>);
+  items.Add(<span class="hljs-string">&#x27;harmadik&#x27;</span>);
+
+  <span class="hljs-comment">// call the constructor</span>
+  otherForm:=TForm2.Create(Self, items);
+  <span class="hljs-comment">// I don&#x27;t know what is it but without this, the other form will not open</span>
+  <span class="hljs-keyword">if</span> otherForm.ShowModal=mrOk <span class="hljs-keyword">then</span>
+  <span class="hljs-keyword">begin</span>
+
+  <span class="hljs-keyword">end</span>;
+  items.Free;
+  otherForm.free;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<h2 id="97-listbox">9.7. ListBox</h2>
+<p>Add item: <code>ListBox1.Items.Add(string)</code></p>
+<p>Delete item: <code>ListBox1.Items.Delete(index)</code></p>
+<p>Get selected:</p>
+<pre><code class="language-pas"><div><span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> ListBox1.Items.Count - <span class="hljs-number">1</span> <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">if</span> ListBox1.Selected[i] <span class="hljs-keyword">then</span>
+  <span class="hljs-keyword">begin</span>
+      selectedItemIndex := i;
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p><code>Multiselect := true</code> / <code>false</code></p>
+<h2 id="98-drag-and-drop">9.8. Drag and drop</h2>
+<h3 id="981-listbox">9.8.1. ListBox</h3>
+<p>There is 2 listboxes</p>
+<p>Drag items from listbox1 to listbox2</p>
+<p>Add items to listbox1</p>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">FormCreate</span><span class="hljs-params">(Sender: TObject)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  ListBox1.Items.Add(<span class="hljs-string">&#x27;elso&#x27;</span>);
+  ListBox1.Items.Add(<span class="hljs-string">&#x27;masodik&#x27;</span>);
+  ListBox1.Items.Add(<span class="hljs-string">&#x27;harmadik&#x27;</span>);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>If start drag, save the selected items index for later usage</p>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">ListBox1DragOver</span><span class="hljs-params">(Sender, Source: TObject; X, Y: Integer;
+  State: TDragState; <span class="hljs-keyword">var</span> Accept: Boolean)</span>;</span>
+<span class="hljs-keyword">var</span> i : integer;
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> ListBox1.Items.Count - <span class="hljs-number">1</span> <span class="hljs-keyword">do</span>
+  <span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">if</span> ListBox1.Selected[i] <span class="hljs-keyword">then</span>
+    <span class="hljs-keyword">begin</span>
+        selectedItemIndex := i;
+    <span class="hljs-keyword">end</span>;
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>If there are items in listbox1, enable drag</p>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">ListBox1MouseDown</span><span class="hljs-params">(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  <span class="hljs-keyword">if</span> ListBox1.Items.Count &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span>
+  <span class="hljs-keyword">begin</span>
+        TListBox(Sender).BeginDrag(false, <span class="hljs-number">5</span>);
+  <span class="hljs-keyword">end</span>;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>Add selected item from listbox1 to listbox2 when dropped on listbox2.</p>
+<p>Then delete from listbox1</p>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">ListBox2DragDrop</span><span class="hljs-params">(Sender, Source: TObject; X, Y: Integer)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  ListBox2.Items.Add(ListBox1.Items[selectedItemIndex]);
+  ListBox1.Items.Delete(selectedItemIndex);
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<p>Enable drag to listbox2</p>
+<pre><code class="language-pas"><div><span class="hljs-function"><span class="hljs-keyword">procedure</span> <span class="hljs-title">TForm1</span>.<span class="hljs-title">ListBox2DragOver</span><span class="hljs-params">(Sender, Source: TObject; X, Y: Integer;
+  State: TDragState; <span class="hljs-keyword">var</span> Accept: Boolean)</span>;</span>
+<span class="hljs-keyword">begin</span>
+  Accept := true;
+<span class="hljs-keyword">end</span>;
+</div></code></pre>
+<h2 id="99-stringgrid">9.9. StringGrid</h2>
+<pre><code class="language-pas"><div>StringGrid1.Cells[columnIndex, rowIndex] := <span class="hljs-string">&#x27;yo&#x27;</span>;
+
+<span class="hljs-comment">// last row last cell</span>
+<span class="hljs-comment">// you will need -1, because of the indexing</span>
+StringGrid1.Cells[StringGrid1.ColCount - <span class="hljs-number">1</span>, StringGrid1.RowCount - <span class="hljs-number">1</span>] := <span class="hljs-string">&#x27;ez&#x27;</span>;
+</div></code></pre>
 <h1 id="10-good-to-know">10. Good to know</h1>
 <h2 id="101-generate-random-character">10.1. Generate random character</h2>
 <p>'A' to 'Z' = 65 - 90</p>
@@ -2332,6 +2529,8 @@ chr(RandomRange(<span class="hljs-number">65</span>, <span class="hljs-number">9
   <span class="hljs-keyword">end</span>;
 <span class="hljs-keyword">end</span>; 
 </div></code></pre>
+<h1 id="11-errors">11. Errors</h1>
+<p>If delphi can't create exe and it isn't opened, find it int Task Manager and kill it.</p>
 
     </body>
     </html>

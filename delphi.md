@@ -59,6 +59,8 @@
   - [6.5. Other file processing mechanisms](#65-other-file-processing-mechanisms)
   - [6.6. Getting information about files and directories](#66-getting-information-about-files-and-directories)
   - [6.7. Using TStringList to read and write text files](#67-using-tstringlist-to-read-and-write-text-files)
+  - [6.8. Extract file path](#68-extract-file-path)
+  - [6.9. ParamStr](#69-paramstr)
 - [7. Conversions](#7-conversions)
   - [7.1. Integer to string](#71-integer-to-string)
   - [7.2. Float to string](#72-float-to-string)
@@ -71,9 +73,18 @@
     - [9.2.1. Confirmation dialog](#921-confirmation-dialog)
     - [9.2.2. Custom dialog with custom button selection](#922-custom-dialog-with-custom-button-selection)
   - [9.3. Picture](#93-picture)
+  - [9.4. Timer](#94-timer)
+  - [9.5. Toolbar](#95-toolbar)
+  - [9.6. Form](#96-form)
+    - [9.6.1. Create another form](#961-create-another-form)
+  - [9.7. ListBox](#97-listbox)
+  - [9.8. Drag and drop](#98-drag-and-drop)
+    - [9.8.1. ListBox](#981-listbox)
+  - [9.9. StringGrid](#99-stringgrid)
 - [10. Good to know](#10-good-to-know)
   - [10.1. Generate random character](#101-generate-random-character)
   - [10.2. Textbox `Edit` when press enter](#102-textbox-edit-when-press-enter)
+- [11. Errors](#11-errors)
 
 # 1. Data types
 
@@ -1739,6 +1750,65 @@ begin
 end;
 ```
 
+## 6.8. Extract file path
+
+The `ExtractFilePath` function extracts from `FullFileName` the path substring.
+ 
+This is the part of the full file name up to and including the final `\` before the file name. 
+
+```pas
+var
+  fullFileName : string;
+
+begin
+  // Set up a full file name with drive and path
+  fullFileName := 'C:\Program Files\Borland\Delphi7\Projects\Unit1.dcu';
+
+  // Show the component parts of this full name
+  ShowMessage('Drive = '+ExtractFileDrive (fullFileName));
+  ShowMessage('Dir   = '+ExtractFileDir   (fullFileName));
+  ShowMessage('Path  = '+ExtractFilePath  (fullFileName));
+  ShowMessage('Name  = '+ExtractFileName  (fullFileName));
+  ShowMessage('Ext   = '+ExtractFileExt   (fullFileName));
+end;
+```
+
+**Output**:
+
+```
+Drive = C:
+Dir   = C:\Program Files\Borland\Delphi7\Projects
+Path  = C:\Program Files\Borland\Delphi7\Projects\
+Name  = Unit1.dcu
+Ext   = .dcu
+```
+
+## 6.9. ParamStr
+
+The `ParamStr` function returns one of the parameters from the command line used to invoke the current program.
+ 
+The `ParamIndex` parameter determines which parameter is returned:
+ 
+`0` : The execution drive/path/program 1 : Return the 1st parameter 2 : Return the 2nd parameter ...
+ 
+If there is no parameter value for the given index,an empty string is returned. 
+
+```pas
+var
+  cmd : string;
+  i : Integer;
+
+begin
+  // Before running this code, use the Run/parameters menu option
+  // to set the following command line parameters : -parm1 -parm2
+
+  // Show these parameters - note that the 0th parameter is the
+  // execution command on Windows
+  for i := 0 to ParamCount do
+    ShowMessage('Parameter '+IntToStr(i)+' = '+ParamStr(i));
+end;
+```
+
 # 7. Conversions
 
 ## 7.1. Integer to string
@@ -1971,6 +2041,183 @@ end;
 PlayerCard1.Picture.LoadFromFile('C:\Users\w\Desktop\delphi\black_jack\images\AC.PNG');
 ```
 
+## 9.4. Timer
+
+## 9.5. Toolbar
+
+## 9.6. Form
+
+`OnCreate`
+
+### 9.6.1. Create another form
+
+Other form:
+
+```pas
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm2 = class(TForm)
+    ListBox1: TListBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    constructor Create(AOwner:Tcomponent;Valasztek:TStrings);
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+constructor TForm2.Create(AOwner: TComponent; Valasztek:TStrings);
+begin
+  inherited Create(Owner);
+  Listbox1.items.Assign(valasztek);
+end;
+
+end.
+```
+
+Create the other form
+
+```pas
+uses .. , Unit2;
+
+...
+
+procedure TForm1.Button1Click(Sender: TObject);
+var otherForm : TForm2;
+var items : TStringList;
+begin
+  // create a list and put items in it
+  items := TStringList.Create;
+  items.Add('elso');
+  items.Add('masodik');
+  items.Add('harmadik');
+
+  // call the constructor
+  otherForm:=TForm2.Create(Self, items);
+  // I don't know what is it but without this, the other form will not open
+  if otherForm.ShowModal=mrOk then
+  begin
+
+  end;
+  items.Free;
+  otherForm.free;
+end;
+```
+
+## 9.7. ListBox
+
+Add item: `ListBox1.Items.Add(string)`
+
+Delete item: `ListBox1.Items.Delete(index)`
+
+Get selected:
+
+```pas
+for i := 0 to ListBox1.Items.Count - 1 do
+begin
+  if ListBox1.Selected[i] then
+  begin
+      selectedItemIndex := i;
+  end;
+end;
+```
+
+`Multiselect := true` / `false`
+
+## 9.8. Drag and drop
+
+### 9.8.1. ListBox
+
+There is 2 listboxes
+
+Drag items from listbox1 to listbox2
+
+Add items to listbox1
+
+```pas
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ListBox1.Items.Add('elso');
+  ListBox1.Items.Add('masodik');
+  ListBox1.Items.Add('harmadik');
+end;
+```
+
+If start drag, save the selected items index for later usage
+
+```pas
+procedure TForm1.ListBox1DragOver(Sender, Source: TObject; X, Y: Integer;
+  State: TDragState; var Accept: Boolean);
+var i : integer;
+begin
+  for i := 0 to ListBox1.Items.Count - 1 do
+  begin
+    if ListBox1.Selected[i] then
+    begin
+        selectedItemIndex := i;
+    end;
+  end;
+end;
+```
+
+If there are items in listbox1, enable drag
+
+```pas
+procedure TForm1.ListBox1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if ListBox1.Items.Count > 0 then
+  begin
+        TListBox(Sender).BeginDrag(false, 5);
+  end;
+end;
+```
+
+Add selected item from listbox1 to listbox2 when dropped on listbox2.
+
+Then delete from listbox1
+
+```pas
+procedure TForm1.ListBox2DragDrop(Sender, Source: TObject; X, Y: Integer);
+begin
+  ListBox2.Items.Add(ListBox1.Items[selectedItemIndex]);
+  ListBox1.Items.Delete(selectedItemIndex);
+end;
+```
+
+Enable drag to listbox2
+
+```pas
+procedure TForm1.ListBox2DragOver(Sender, Source: TObject; X, Y: Integer;
+  State: TDragState; var Accept: Boolean);
+begin
+  Accept := true;
+end;
+```
+
+## 9.9. StringGrid
+
+```pas
+StringGrid1.Cells[columnIndex, rowIndex] := 'yo';
+
+// last row last cell
+// you will need -1, because of the indexing
+StringGrid1.Cells[StringGrid1.ColCount - 1, StringGrid1.RowCount - 1] := 'ez';
+```
+
 # 10. Good to know
 
 ## 10.1. Generate random character
@@ -2003,3 +2250,7 @@ begin
   end;
 end; 
 ```
+
+# 11. Errors
+
+If delphi can't create exe and it isn't opened, find it int Task Manager and kill it.
